@@ -38,9 +38,14 @@ button{cursor:pointer}
 .reader-page{padding:0;display:none}
 .flow-viewport{width:100%;height:100%;overflow:hidden}
 .flow-content{
-  height:100%;width:100%;column-width:calc(100vw - 58px);column-gap:0;column-fill:auto;
-  padding:34px clamp(24px,7vw,70px) 38px;
+  height:100%;width:100%;column-width:auto;column-gap:0;column-fill:auto;
+  padding:34px 0 38px;
   font-size:var(--reader-size);line-height:var(--reader-line);text-align:justify;hyphens:auto;
+}
+.flow-content .chapter-head,
+.flow-content .chapter p{
+  padding-left:clamp(24px,7vw,70px);
+  padding-right:clamp(24px,7vw,70px);
 }
 .chapter{break-before:column;column-break-before:always}
 .chapter:first-child{break-before:auto;column-break-before:auto}
@@ -89,20 +94,26 @@ html:fullscreen .stage{padding:0;height:100%}
 html:fullscreen .book-shell{max-width:none;height:100%}
 html:fullscreen .page{border:0;border-radius:0;box-shadow:none}
 html:fullscreen .fs-exit{display:block}
-html:fullscreen .flow-content{padding:max(32px,env(safe-area-inset-top)) clamp(24px,7vw,82px) max(30px,env(safe-area-inset-bottom));column-width:100vw}
+html:fullscreen .flow-content{padding:max(32px,env(safe-area-inset-top)) 0 max(30px,env(safe-area-inset-bottom));column-width:auto}
+html:fullscreen .flow-content .chapter-head,
+html:fullscreen .flow-content .chapter p{padding-left:clamp(24px,7vw,82px);padding-right:clamp(24px,7vw,82px)}
 html:fullscreen .cover-page img{object-fit:contain}
 body.immersive .topbar,body.immersive .nav,body.immersive .progress-wrap,body.immersive .drawer,body.immersive .drawer-backdrop{display:none!important}
 body.immersive .stage{padding:0;height:100%}
 body.immersive .book-shell{max-width:none;height:100%}
 body.immersive .page{border:0;border-radius:0;box-shadow:none}
 body.immersive .fs-exit{display:block}
-body.immersive .flow-content{padding:max(32px,env(safe-area-inset-top)) clamp(24px,7vw,82px) max(30px,env(safe-area-inset-bottom));column-width:100vw}
+body.immersive .flow-content{padding:max(32px,env(safe-area-inset-top)) 0 max(30px,env(safe-area-inset-bottom));column-width:auto}
+body.immersive .flow-content .chapter-head,
+body.immersive .flow-content .chapter p{padding-left:clamp(24px,7vw,82px);padding-right:clamp(24px,7vw,82px)}
 @media(max-width:640px){
   .brand{max-width:27vw;font-size:.82rem}
   .topbar{padding:6px 7px}
   .icon-btn{min-width:40px;min-height:40px;padding:7px 9px}
   .stage{padding:5px}
-  .flow-content{padding:24px 20px 30px;column-width:calc(100vw - 42px);text-align:left}
+  .flow-content{padding:24px 0 30px;column-width:auto;text-align:left}
+  .flow-content .chapter-head,
+  .flow-content .chapter p{padding-left:20px;padding-right:20px}
   .chapter-head{margin-bottom:20px}
   .chapter h1{font-size:clamp(1.35rem,6vw,1.8rem)}
   .nav{margin-top:4px}
@@ -1441,7 +1452,10 @@ body.immersive .flow-content{padding:max(32px,env(safe-area-inset-top)) clamp(24
   function computePages(preserve=true){
     const ratio=textPages>1?clamp((current-1)/(textPages-1),0,1):0;
     const w=viewport.clientWidth||1;
-    textPages=Math.max(1,Math.round(flow.scrollWidth/w));
+    flow.style.columnWidth=w+'px';
+    flow.style.width=w+'px';
+    void flow.offsetWidth;
+    textPages=Math.max(1,Math.ceil((flow.scrollWidth-1)/w));
     totalPages=textPages+1;
     if(current>0 && preserve) current=1+Math.round(ratio*Math.max(0,textPages-1));
     current=clamp(current,0,textPages);
