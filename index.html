@@ -14,27 +14,34 @@
 <title>Marine, de l’écran à la scène</title>
 <style>
 :root{
-  --bg:#efe1c9;--paper:#fffaf1;--ink:#241c1d;--muted:#75686b;--border:#d7c3aa;
-  --dark:#17151d;--gold:#c9a45d;--rose:#b45e70;--panel:#f6ecde;
+  --bg:#eadac6;--paper:#fffaf3;--ink:#2c2123;--muted:#7a6970;--border:#d8c1b0;
+  --dark:#1b1724;--gold:#caa35d;--rose:#bf6f8c;--rose-soft:#f6dbe5;--plum:#433046;--panel:#f8ecdf;
   --reader-size:19px;--reader-line:1.72;
 }
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:Georgia,"Times New Roman",serif}
-body.theme-white{--paper:#fff;--panel:#f5f5f5;--bg:#e8e8e8;--ink:#181818;--border:#d5d5d5}
-body.theme-ivory{--paper:#fff8e9;--panel:#f4ead7;--bg:#e2d2b7;--ink:#241d18;--border:#d5c2a2}
-button,input{font:inherit}
+html,body{margin:0;height:100%;background:radial-gradient(circle at top left, rgba(255,255,255,.65), transparent 38%), radial-gradient(circle at bottom right, rgba(191,111,140,.16), transparent 32%), linear-gradient(180deg,#e8d7c6 0%, #dec6b0 100%);color:var(--ink);font-family:Georgia,"Times New Roman",serif}
+body{position:relative;overflow:hidden}
+body::before,body::after{content:"";position:fixed;pointer-events:none;z-index:0;border-radius:999px;filter:blur(26px);opacity:.6}
+body::before{width:180px;height:180px;left:-42px;top:78px;background:rgba(255,255,255,.38)}
+body::after{width:210px;height:210px;right:-70px;bottom:34px;background:rgba(191,111,140,.18)}
+body.theme-white{--paper:#fff;--panel:#f7f7f9;--bg:#e8e8eb;--ink:#181818;--border:#d7d7df;--rose-soft:#efeff5}
+body.theme-ivory{--paper:#fff8ee;--panel:#f7ebdb;--bg:#e2d2b7;--ink:#241d18;--border:#d7c2a8}
+button,input,select{font:inherit}
 button{cursor:pointer}
-.app{height:100%;display:flex;flex-direction:column;overflow:hidden}
-.topbar{flex:0 0 auto;display:flex;align-items:center;gap:8px;justify-content:space-between;padding:8px 10px;background:rgba(23,21,29,.97);color:#fff;backdrop-filter:blur(9px);z-index:10}
-.brand{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:38vw}
-.actions{display:flex;gap:6px;align-items:center;flex-wrap:nowrap}
-.icon-btn{min-width:43px;min-height:43px;border-radius:12px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;padding:8px 11px}
-.icon-btn:hover{background:rgba(255,255,255,.14)}
-.stage{flex:1 1 auto;min-height:0;padding:8px;display:flex;flex-direction:column;overflow:hidden}
-.book-shell{flex:1 1 auto;min-height:0;width:100%;max-width:820px;margin:0 auto;display:flex}
-.page{position:relative;flex:1 1 auto;min-height:0;background:var(--paper);border:1px solid var(--border);border-radius:5px;box-shadow:0 14px 32px rgba(32,22,23,.18);overflow:hidden}
+.app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;overflow:hidden}
+.topbar{flex:0 0 auto;display:flex;align-items:center;gap:10px;justify-content:space-between;padding:10px 12px;background:linear-gradient(135deg, rgba(28,21,38,.98), rgba(37,34,58,.95));color:#fff;border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(12px);box-shadow:0 10px 24px rgba(15,10,20,.25);z-index:10}
+.brand{min-width:0;display:flex;flex-direction:column;gap:2px;max-width:48vw}
+.brand-kicker{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:#f2d7df;opacity:.95}
+.brand-title{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:1rem}
+.actions{display:flex;gap:8px;align-items:center;flex-wrap:nowrap}
+.icon-btn{min-width:44px;min-height:44px;border-radius:16px;border:1px solid rgba(255,255,255,.15);background:linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.05));color:#fff;padding:8px 11px;box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 18px rgba(0,0,0,.18);transition:transform .16s ease,background .16s ease,box-shadow .16s ease}
+.icon-btn:hover,.icon-btn:focus-visible{background:linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.08));transform:translateY(-1px);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 10px 20px rgba(0,0,0,.22)}
+.stage{flex:1 1 auto;min-height:0;padding:10px;display:flex;flex-direction:column;overflow:hidden}
+.book-shell{flex:1 1 auto;min-height:0;width:100%;max-width:860px;margin:0 auto;display:flex}
+.page{position:relative;flex:1 1 auto;min-height:0;background:linear-gradient(180deg, rgba(255,255,255,.24), rgba(255,255,255,0) 12%), var(--paper);border:1px solid rgba(216,193,176,.92);border-radius:20px;box-shadow:0 18px 40px rgba(52,31,38,.16);overflow:hidden}
+.page::after{content:"♪ ♡ ♪";position:absolute;right:18px;top:14px;font-size:.94rem;letter-spacing:.38rem;color:rgba(191,111,140,.16);pointer-events:none}
 .cover-page{padding:0;background:#111;display:flex;align-items:center;justify-content:center}
-.cover-page img{width:100%;height:100%;display:block;object-fit:contain;background:#111}
+.cover-page img{width:100%;height:100%;display:block;object-fit:contain;background:#111;filter:drop-shadow(0 14px 28px rgba(0,0,0,.22))}
 .reader-page{padding:0;display:none}
 .flow-viewport{width:100%;height:100%;overflow:hidden}
 .flow-content{
@@ -56,37 +63,38 @@ button{cursor:pointer}
 .chapter p.first-para{text-indent:0}
 .chapter p.first-para:first-letter{float:left;font-size:3.2em;line-height:.8;padding-right:.08em;color:var(--gold)}
 .chapter p.dialogue{text-indent:0}
-.nav{flex:0 0 auto;max-width:820px;width:100%;margin:7px auto 0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:8px}
-.nav button{border:1px solid var(--border);background:var(--paper);color:var(--ink);border-radius:12px;padding:9px 13px;min-height:42px}
+.nav{flex:0 0 auto;max-width:860px;width:100%;margin:10px auto 0;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px}
+.nav button{border:1px solid rgba(196,169,155,.9);background:linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,248,238,.92));color:var(--ink);border-radius:18px;padding:10px 15px;min-height:46px;box-shadow:0 10px 18px rgba(93,60,70,.08), inset 0 1px 0 rgba(255,255,255,.9)}
 .nav .next{justify-self:end}
-.nav .counter{font-size:.9rem;color:#51474a;text-align:center;min-width:95px}
-.progress-wrap{flex:0 0 auto;max-width:820px;width:100%;margin:5px auto 0}
-.progress{height:4px;background:rgba(0,0,0,.12);border-radius:99px;overflow:hidden}
+.nav .counter-btn{font-size:.96rem;font-weight:700;color:#4f4450;text-align:center;min-width:125px;padding:10px 18px;border-radius:18px;border:1px solid rgba(191,111,140,.32);background:linear-gradient(180deg, rgba(246,219,229,.95), rgba(255,250,243,.95));box-shadow:0 12px 20px rgba(93,60,70,.08), inset 0 1px 0 rgba(255,255,255,.95)}
+.counter-sub{display:block;font-size:.72rem;font-weight:400;color:#806f74;margin-top:2px}
+.progress-wrap{flex:0 0 auto;max-width:860px;width:100%;margin:6px auto 0}
+.progress{height:6px;background:rgba(74,42,57,.12);border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 2px rgba(0,0,0,.05)}
 .progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--rose))}
-.progress-label{font-size:11px;color:#655b5d;display:flex;justify-content:space-between;margin-top:3px}
+.progress-label{font-size:11.5px;color:#655b5d;display:flex;justify-content:space-between;margin-top:5px;letter-spacing:.02em}
 .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:40;display:none}
 .drawer-backdrop.open{display:block}
-.drawer{position:fixed;top:0;bottom:0;left:0;width:min(390px,92vw);background:var(--paper);z-index:50;transform:translateX(-105%);transition:.2s;overflow:auto;box-shadow:10px 0 30px rgba(0,0,0,.28)}
+.drawer{position:fixed;top:0;bottom:0;left:0;width:min(410px,92vw);background:linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.18) 14%), var(--paper);z-index:50;transform:translateX(-105%);transition:.22s;overflow:auto;box-shadow:10px 0 34px rgba(28,19,30,.24);backdrop-filter:blur(10px)}
 .drawer.open{transform:none}
 .drawer-head{position:sticky;top:0;background:var(--paper);display:flex;justify-content:space-between;align-items:center;padding:16px;border-bottom:1px solid var(--border);z-index:2}
 .drawer-head h2{margin:0;font-size:1.2rem}
 .close-btn{border:0;background:transparent;font-size:1.5rem;min-width:44px;min-height:44px;color:var(--ink)}
 .drawer-body{padding:14px 16px 24px}
-.chapter-list{display:grid;gap:7px}
-.chapter-link{text-align:left;border:1px solid var(--border);background:var(--panel);color:var(--ink);padding:11px 12px;border-radius:10px}
-.chapter-link.active{outline:2px solid var(--rose);background:var(--paper)}
+.chapter-list{display:grid;gap:11px;margin-top:4px}
+.chapter-link{text-align:left;border:1px solid rgba(201,184,166,.9);background:linear-gradient(180deg, rgba(255,255,255,.44), rgba(255,255,255,.08)), var(--panel);color:var(--ink);padding:14px 14px;border-radius:16px;box-shadow:0 8px 18px rgba(65,36,45,.05)}
+.chapter-link.active{outline:2px solid var(--rose);background:linear-gradient(180deg, rgba(246,219,229,.75), rgba(255,250,243,.95));box-shadow:0 12px 20px rgba(98,56,71,.09)}
 .setting{margin-bottom:16px}
 .setting label{display:block;font-weight:700;margin-bottom:7px}
 .theme-choice{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.theme-choice button{padding:12px;border-radius:10px;border:2px solid var(--border)}
+.theme-choice button{padding:12px;border-radius:14px;border:2px solid var(--border);background:linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.2))}
 .theme-choice .selected{outline:3px solid var(--rose)}
 .range-row{display:flex;gap:10px;align-items:center}
 .range-row input{width:100%}
 .audio-actions{display:grid;gap:8px}
-.audio-actions button{padding:12px;border-radius:10px;border:1px solid var(--border);background:var(--panel);color:var(--ink)}
+.audio-actions button{padding:12px;border-radius:14px;border:1px solid var(--border);background:linear-gradient(180deg, rgba(255,255,255,.55), rgba(255,255,255,.12)), var(--panel);color:var(--ink)}
 .audio-status{font-size:.88rem;color:var(--muted);line-height:1.4;margin:10px 0}
 .badge{display:inline-block;border:1px solid var(--border);background:var(--panel);border-radius:999px;padding:5px 9px;font-size:.78rem;color:var(--muted)}
-.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#211d24;color:#fff;padding:10px 14px;border-radius:999px;z-index:90;opacity:0;pointer-events:none;transition:.2s}
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:linear-gradient(135deg,#241826,#3d2c42);color:#fff;padding:11px 16px;border-radius:999px;z-index:90;opacity:0;pointer-events:none;transition:.2s;box-shadow:0 10px 22px rgba(24,14,27,.26)}
 .toast.show{opacity:1}
 .fs-exit{display:none;position:fixed;right:max(8px,env(safe-area-inset-right));top:max(8px,env(safe-area-inset-top));z-index:100;width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.35);background:rgba(20,17,22,.48);color:#fff;font-size:20px}
 html:fullscreen .topbar,html:fullscreen .nav,html:fullscreen .progress-wrap,html:fullscreen .drawer,html:fullscreen .drawer-backdrop{display:none!important}
@@ -106,38 +114,89 @@ body.immersive .fs-exit{display:block}
 body.immersive .flow-content{padding:max(32px,env(safe-area-inset-top)) 0 max(30px,env(safe-area-inset-bottom));column-width:auto}
 body.immersive .flow-content .chapter-head,
 body.immersive .flow-content .chapter p{padding-left:clamp(24px,7vw,82px);padding-right:clamp(24px,7vw,82px)}
+
+
+.end-page{display:none;overflow-y:auto;background:linear-gradient(180deg,#241827 0%,#6c4059 32%,#efd7c8 100%)!important;color:#fff;padding:0!important}
+.end-hero{min-height:250px;padding:46px 24px 32px;display:flex;align-items:flex-end;justify-content:center;text-align:center;background:radial-gradient(circle at 70% 20%,rgba(255,217,232,.2),transparent 35%),linear-gradient(180deg,#211725,#5c354f);position:relative;overflow:hidden}
+.end-hero::before{content:"♫  ♡  ♪";position:absolute;top:28px;left:0;right:0;font-size:1.25rem;letter-spacing:.9rem;color:rgba(255,231,239,.28)}
+.end-hero-inner{max-width:650px;text-shadow:0 2px 14px rgba(0,0,0,.35)}
+.end-kicker{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:800;color:#f5d5df}
+.end-title{font-size:clamp(2rem,7vw,3.2rem);line-height:1.06;margin:10px 0 14px}
+.end-thanks{font-size:clamp(1rem,3.7vw,1.16rem);line-height:1.65;margin:0 auto;max-width:610px;color:#fffafc}
+.end-sign{margin-top:14px;font-weight:800;color:#f4d3b5}
+.end-panel{background:linear-gradient(180deg,#fff7ef,#f5e0d2);color:#2f2328;padding:24px clamp(14px,5vw,34px) 36px}
+.end-card{max-width:650px;margin:0 auto 18px;background:rgba(255,255,255,.82);border:1px solid rgba(191,111,140,.22);border-radius:22px;padding:20px;box-shadow:0 14px 32px rgba(67,48,70,.12)}
+.end-card h2{margin:0 0 7px;font-size:1.42rem;color:#422d3b}.end-card p{margin:0 0 16px;color:#78656c;line-height:1.5}
+.rating-row{display:flex;justify-content:center;gap:5px;margin:6px 0 16px}
+.star-btn{border:0;background:transparent;font-size:2.2rem;line-height:1;color:#cdbdc3;padding:4px;cursor:pointer}.star-btn.on{color:#d4a54c;text-shadow:0 3px 10px rgba(202,163,93,.22)}
+.end-card textarea,.end-card input{width:100%;border:1px solid #dbc7cc;border-radius:14px;background:#fffdfb;color:#2f2328;padding:12px 13px;font:inherit}
+.end-card textarea{min-height:105px;resize:vertical}
+.end-field{display:grid;gap:6px;margin:12px 0}.end-field label{font-weight:700;color:#513946}
+.end-choice{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.end-choice button{border:1px solid #d0afb9;background:#fffaf8;color:#4a3440;border-radius:13px;padding:10px 7px;font-weight:700}
+.end-choice button.selected{background:linear-gradient(135deg,#bf6f8c,#caa35d);color:#fff;border-color:transparent}
+.end-submit,.notify-save-inline{width:100%;margin-top:14px;border:0;border-radius:15px;padding:13px 18px;background:linear-gradient(135deg,#b96483,#c5944e);color:#fff;font-weight:800;font-size:1rem;box-shadow:0 10px 20px rgba(118,68,85,.18)}
+.end-note{text-align:center;font-size:.78rem!important;margin:10px 0 0!important;color:#8b777e!important}
+.end-confirm{display:none;margin-top:14px;padding:12px;border-radius:12px;background:#edf5e8;color:#355126;text-align:center;font-weight:700}.end-confirm.show{display:block}
+.notify-consent-inline{display:flex;gap:9px;align-items:flex-start;font-size:.86rem;margin-top:12px;color:#6c5b62}.notify-consent-inline input{width:auto;margin-top:3px}
+html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:0!important;border-radius:0!important;box-shadow:none!important}
+@media(max-width:560px){.end-hero{min-height:235px;padding:38px 18px 26px}.end-panel{padding:18px 10px 28px}.end-card{padding:17px 13px;border-radius:18px}.end-choice{grid-template-columns:1fr}.star-btn{font-size:2rem}}
+
+.modal{position:fixed;inset:0;background:rgba(23,21,29,.42);display:none;align-items:center;justify-content:center;z-index:70;padding:18px}
+.modal.open{display:flex}
+.modal-card{width:min(430px,100%);background:linear-gradient(180deg, rgba(255,255,255,.8), rgba(255,255,255,.16) 18%), var(--paper);border:1px solid rgba(216,193,176,.92);border-radius:22px;box-shadow:0 18px 40px rgba(30,18,31,.24);padding:18px}
+.modal-top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.modal-top h3{margin:0;font-size:1.1rem;color:#34252f}
+.modal-close{border:0;background:transparent;color:var(--ink);font-size:1.5rem;min-width:40px;min-height:40px}
+.modal-sub{margin:0 0 16px;color:var(--muted);font-size:.92rem;line-height:1.45}
+.jump-grid{display:grid;gap:14px}
+.jump-range{width:100%;accent-color:var(--rose)}
+.jump-row{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.jump-row input[type=number]{width:92px;padding:10px 12px;border-radius:14px;border:1px solid var(--border);background:var(--paper)}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px}
+.modal-actions button{padding:11px 15px;border-radius:14px;border:1px solid var(--border);background:linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.18));color:var(--ink)}
+.modal-actions .primary{background:linear-gradient(135deg, rgba(191,111,140,.95), rgba(202,163,93,.92));color:#fff;border-color:transparent;box-shadow:0 12px 20px rgba(97,54,69,.18)}
+.chip-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.ui-chip{display:inline-flex;align-items:center;gap:6px;padding:8px 11px;border-radius:999px;font-size:.78rem;color:#725f64;background:rgba(246,219,229,.65);border:1px solid rgba(191,111,140,.16)}
+
 @media(max-width:640px){
-  .brand{max-width:27vw;font-size:.82rem}
-  .topbar{padding:6px 7px}
-  .icon-btn{min-width:40px;min-height:40px;padding:7px 9px}
-  .stage{padding:5px}
+  .brand{max-width:40vw}
+  .brand-kicker{font-size:.6rem}
+  .brand-title{font-size:.84rem}
+  .topbar{padding:8px 8px}
+  .icon-btn{min-width:40px;min-height:40px;padding:7px 9px;border-radius:14px}
+  .stage{padding:6px}
+  .page{border-radius:14px}
   .flow-content{padding:24px 0 30px;column-width:auto;text-align:left}
   .flow-content .chapter-head,
   .flow-content .chapter p{padding-left:20px;padding-right:20px}
   .chapter-head{margin-bottom:20px}
   .chapter h1{font-size:clamp(1.35rem,6vw,1.8rem)}
   .nav{margin-top:4px}
-  .nav button{min-height:38px;padding:7px 9px;font-size:.84rem}
+  .nav button{min-height:40px;padding:7px 10px;font-size:.84rem;border-radius:16px}
+  .nav .counter-btn{min-width:112px;padding:8px 10px;font-size:.88rem}
   .progress-wrap{margin-top:3px}
+  .modal-card{padding:16px}
 }
+
 @media(prefers-reduced-motion:reduce){.drawer,.toast{transition:none}}
 </style>
 </head>
 <body class="theme-ivory">
 <div class="app" id="app" tabindex="0">
   <header class="topbar">
-    <div class="brand">Marine — De l’écran à la scène</div>
+    <div class="brand"><span class="brand-kicker">♫ Le Grognard du Net</span><span class="brand-title">Marine — De l’écran à la scène</span></div>
     <div class="actions">
-      <button class="icon-btn" id="chaptersBtn" aria-label="Chapitres" title="Chapitres">☰</button>
-      <button class="icon-btn" id="audioBtn" aria-label="Lecture audio" title="Lecture audio">🔊</button>
-      <button class="icon-btn" id="fullscreenBtn" aria-label="Plein écran" title="Plein écran">⛶</button>
-      <button class="icon-btn" id="settingsBtn" aria-label="Réglages" title="Réglages">Aa</button>
+      <button class="icon-btn" id="chaptersBtn" aria-label="Chapitres" title="Chapitres"><span aria-hidden="true">☰</span></button>
+      <button class="icon-btn" id="audioBtn" aria-label="Lecture audio" title="Lecture audio"><span aria-hidden="true">♫</span></button>
+      <button class="icon-btn" id="fullscreenBtn" aria-label="Plein écran" title="Plein écran"><span aria-hidden="true">⛶</span></button>
+      <button class="icon-btn" id="settingsBtn" aria-label="Réglages" title="Réglages"><span aria-hidden="true">Aa</span></button>
     </div>
   </header>
 
   <main class="stage">
     <div class="book-shell">
-      <article class="page cover-page" id="coverPage"><img src="cover.jpg" alt="Couverture du livre Marine, de l’écran à la scène"></article>
+      <article class="page cover-page" id="coverPage"><img src="cover.png" alt="Couverture du livre Marine, de l’écran à la scène"></article>
       <article class="page reader-page" id="readerPage">
         <div class="flow-viewport" id="flowViewport">
           <div class="flow-content" id="flowContent">
@@ -939,647 +998,3 @@ body.immersive .flow-content .chapter p{padding-left:clamp(24px,7vw,82px);paddin
 <p id="p-10-73" class="">Le vrai défi commence lorsque le château ferme.</p>
 <p id="p-10-74" class="">Marine le savait.</p>
 <p id="p-10-75" class="">Dans ses interviews des jours suivants, elle parlait encore de ses doutes, de son envie de faire un album qui mélange plusieurs univers, de ses chansons déjà écrites, de son plan B dentaire qu&#x27;elle ne voulait pas totalement jeter à la poubelle.</p>
-<p id="p-10-76" class="">Cette prudence me plaisait.</p>
-<p id="p-10-77" class="">Elle venait de gagner devant des millions de téléspectateurs et continuait à parler comme quelqu&#x27;un qui savait que rien n&#x27;était acquis.</p>
-<p id="p-10-78" class="">Moi, de mon côté, j&#x27;étais ravi.</p>
-<p id="p-10-79" class="">Et un peu inquiet.</p>
-<p id="p-10-80" class="">Parce qu&#x27;une émission protège aussi les artistes. Elle leur fournit des chansons, une scène, une exposition énorme, un récit hebdomadaire.</p>
-<p id="p-10-81" class="">Après, il faut exister seul.</p>
-<p id="p-10-82" class="">Le public ne va plus voter pour sauver Marine.</p>
-<p id="p-10-83" class="">Il va choisir ou non d&#x27;écouter ses titres.</p>
-<p id="p-10-84" class="">Il va acheter ou non des places.</p>
-<p id="p-10-85" class="">Il va rester ou passer à autre chose.</p>
-<p id="p-10-86" class="">C&#x27;est là que mon regard de fan a commencé à devenir encore plus intéressant.</p>
-<p id="p-10-87" class="">Pendant la Star Academy, Marine faisait partie d&#x27;une histoire collective.</p>
-<p id="p-10-88" class="">Après la finale, il fallait découvrir l&#x27;artiste.</p>
-<p id="p-10-89" class="">La première étape était déjà là : « Ma faute ».</p>
-<p id="p-10-90" class="">La chanson, publiée bien avant l&#x27;émission, connaissait une nouvelle vie spectaculaire. Une version retravaillée sort. Le clip arrive. Le titre monte, s&#x27;installe et finit par obtenir des certifications que la jeune femme qui l&#x27;avait enregistrée avant le château aurait probablement eu du mal à imaginer.</p>
-<p id="p-10-91" class="">Quelques semaines plus tard, Bollaert.</p>
-<p id="p-10-92" class="">Puis la tournée Star Academy.</p>
-<p id="p-10-93" class="">Puis les studios.</p>
-<p id="p-10-94" class="">Puis les annonces.</p>
-<p id="p-10-95" class="">Chaque fois, j&#x27;avais de la matière pour mes vidéos.</p>
-<p id="p-10-96" class="">Mais surtout, chaque fois, j&#x27;avais cette impression étrange de voir une histoire continuer alors que, d&#x27;habitude, pour moi, la Star Academy se terminait presque avec la finale.</p>
-<p id="p-10-97" class="">Cette fois, je ne voulais pas fermer le livre.</p>
-<p id="p-10-98" class="">Je voulais le chapitre suivant.</p>
-<p id="p-10-99" class="">C&#x27;est peut-être à ce moment-là que j&#x27;ai vraiment compris la différence entre les autres saisons et celle de Marine.</p>
-<p id="p-10-100" class="">Pierre Garnier avait gagné l&#x27;année précédente et j&#x27;avais suivi son succès avec intérêt.</p>
-<p id="p-10-101" class="">Marine a gagné et j&#x27;ai eu envie de l&#x27;accompagner de loin dans la suite.</p>
-<p id="p-10-102" class="">Pas de la connaître.</p>
-<p id="p-10-103" class="">Pas d&#x27;entrer dans sa vie.</p>
-<p id="p-10-104" class="">Simplement d&#x27;être là, côté public.</p>
-<p id="p-10-105" class="">D&#x27;écouter.</p>
-<p id="p-10-106" class="">De raconter.</p>
-<p id="p-10-107" class="">De créer.</p>
-<p id="p-10-108" class="">Pour un fan, c&#x27;est déjà beaucoup.</p>
-</section>
-<section class="chapter" id="sec-11" data-section="11">
-<div class="chapter-head">
-<div class="chapter-kicker">CHAPITRE 10</div>
-<h1>APRÈS LA FINALE, TOUT COMMENCE</h1></div>
-<p id="p-11-0" class="first-para">Les mois qui suivent la victoire vont vite.</p>
-<p id="p-11-1" class="">Très vite.</p>
-<p id="p-11-2" class="">Marine passe de la vie au château à une tournée médiatique, puis à la tournée Star Academy. Elle enchaîne les scènes avec les autres académiciens. Elle découvre le rythme de l&#x27;après : les interviews, les studios, les déplacements, les répétitions, les fans qui l&#x27;attendent désormais ailleurs que derrière un écran.</p>
-<p id="p-11-3" class="">Pendant ce temps, « Ma faute » poursuit sa trajectoire.</p>
-<p id="p-11-4" class="">Ce qui me plaît dans ce succès, c&#x27;est son ordre chronologique.</p>
-<p id="p-11-5" class="">La chanson existait avant la célébrité.</p>
-<p id="p-11-6" class="">La célébrité n&#x27;a pas créé le morceau ; elle l&#x27;a fait entendre.</p>
-<p id="p-11-7" class="">En 2025, le titre devient un vrai succès, jusqu&#x27;à être certifié diamant en France à la fin de l&#x27;année. C&#x27;est vertigineux quand on repense à sa naissance discrète quelques années plus tôt.</p>
-<p id="p-11-8" class="">Puis arrive « Cœur maladroit ».</p>
-<p id="p-11-9" class="">Rien que le titre me semble parfaitement choisi pour Marine.</p>
-<p id="p-11-10" class="">Il y a cette idée d&#x27;émotion assumée, mais jamais parfaitement rangée. Quelque chose de tendre, d&#x27;un peu bancal, de très humain.</p>
-<p id="p-11-11" class="">Le morceau annonce un premier album qui sort le 27 juin 2025 chez Columbia/Sony Music.</p>
-<p id="p-11-12" class="">Treize titres.</p>
-<p id="p-11-13" class="">Et, surtout, la nécessité de répondre à la grande question : qui est Marine lorsqu&#x27;elle ne chante plus les chansons choisies pour elle par la Star Academy ?</p>
-<p id="p-11-14" class="">L&#x27;album donne une première réponse.</p>
-<p id="p-11-15" class="">« Fille ordinaire » ouvre le disque. « Cœur maladroit » installe une pop immédiatement accessible. « Ma faute » revient dans une nouvelle version. D&#x27;autres titres explorent des zones plus intimes, plus légères ou plus mélancoliques.</p>
-<p id="p-11-16" class="">Je n&#x27;ai pas besoin d&#x27;aimer chaque chanson de la même manière pour comprendre l&#x27;ensemble.</p>
-<p id="p-11-17" class="">Ce que j&#x27;entends, c&#x27;est une artiste qui refuse de choisir entre la grande variété qu&#x27;elle aime et une pop plus actuelle.</p>
-<p id="p-11-18" class="">Elle travaille avec différents auteurs, compositeurs et producteurs. Eddy de Pretto participe notamment à l&#x27;écriture de « Fille ordinaire ». Marine signe ou cosigne plusieurs morceaux.</p>
-<p id="p-11-19" class="">C&#x27;est important.</p>
-<p id="p-11-20" class="">Parce que le mot « gagnante de la Star Academy » peut être un tremplin mais aussi une étiquette collante.</p>
-<p id="p-11-21" class="">Pour sortir de l&#x27;émission, il faut que le public commence à dire simplement « Marine ».</p>
-<p id="p-11-22" class="">Pas « Marine de la Star Ac ».</p>
-<p id="p-11-23" class="">Marine.</p>
-<p id="p-11-24" class="">À l&#x27;été 2025, j&#x27;ai consacré beaucoup de contenu à cette nouvelle phase.</p>
-<p id="p-11-25" class="">Je voulais parler de l&#x27;album, de ses morceaux, de ce que cela révélait de son univers. Je préparais des vidéos sur les raisons pour lesquelles le public s&#x27;attachait à elle. Je suivais les clips, les interviews, les petites anecdotes.</p>
-<p id="p-11-26" class="">Et toujours cette même règle : les ragots, non.</p>
-<p id="p-11-27" class="">Le travail, oui.</p>
-<p id="p-11-28" class="">La musique, oui.</p>
-<p id="p-11-29" class="">Les déclarations publiques, oui.</p>
-<p id="p-11-30" class="">Les inventions sur sa vie privée, non.</p>
-<p id="p-11-31" class="">C&#x27;est moins spectaculaire.</p>
-<p id="p-11-32" class="">C&#x27;est aussi beaucoup plus confortable pour dormir.</p>
-<p id="p-11-33" class="">À l&#x27;automne, la carrière continue d&#x27;accélérer.</p>
-<p id="p-11-34" class="">L&#x27;album aura droit à une édition deluxe en décembre 2025, enrichie de nouveaux titres. « Cœur maladroit » sera certifié or en single. L&#x27;album, lui, atteindra le platine en janvier 2026, environ six mois après sa sortie.</p>
-<p id="p-11-35" class="">« Ma faute » devient diamant.</p>
-<p id="p-11-36" class="">Sur le papier, ce sont des certifications.</p>
-<p id="p-11-37" class="">Pour moi, elles ont surtout une signification : le public n&#x27;est pas parti après la finale.</p>
-<p id="p-11-38" class="">C&#x27;est probablement la peur silencieuse de tous les gagnants de télé-crochets.</p>
-<p id="p-11-39" class="">Et après ?</p>
-<p id="p-11-40" class="">Après, dans le cas de Marine, il y a eu des disques vendus, des millions d&#x27;écoutes, des salles, une tournée solo.</p>
-<p id="p-11-41" class="">Il y a eu aussi ce moment que j&#x27;attendais depuis que tout avait commencé.</p>
-<p id="p-11-42" class="">Le passage de l&#x27;écran à la scène.</p>
-<p id="p-11-43" class="">Montpellier.</p>
-<p id="p-11-44" class="">Jusque-là, Marine avait été un visage sur mes écrans, une voix dans mes écouteurs, un sujet de vidéos, une artiste que je suivais à distance.</p>
-<p id="p-11-45" class="">Et soudain, elle allait être dans la même salle que moi.</p>
-<p id="p-11-46" class="">Je sais que cela paraît banal pour quelqu&#x27;un qui va régulièrement à des concerts.</p>
-<p id="p-11-47" class="">Pour moi, ça ne l&#x27;était pas.</p>
-<p id="p-11-48" class="">Parce que j&#x27;avais passé des mois à raconter son histoire.</p>
-<p id="p-11-49" class="">Et que, pour la première fois, je n&#x27;allais plus regarder à travers une caméra de télévision.</p>
-<p id="p-11-50" class="">Enfin… pas uniquement.</p>
-<p id="p-11-51" class="">Le Grognard reste un créateur de vidéos.</p>
-<p id="p-11-52" class="">Il ne faut pas demander des miracles.</p>
-<p id="p-11-53" class="">J&#x27;ai aussi appris à écouter l&#x27;album autrement que comme un fan de télévision.</p>
-<p id="p-11-54" class="">C&#x27;est une étape importante.</p>
-<p id="p-11-55" class="">Au château, une chanson est un exercice autant qu&#x27;une interprétation. Elle peut être choisie pour tester une voix, provoquer une émotion, créer un tableau ou fabriquer un moment de prime.</p>
-<p id="p-11-56" class="">Sur un album, l&#x27;artiste porte la responsabilité de l&#x27;ensemble.</p>
-<p id="p-11-57" class="">On peut aimer ou non, mais cette fois le disque parle en son nom.</p>
-<p id="p-11-58" class="">« Cœur maladroit » m&#x27;a donc intéressé pour ce qu&#x27;il disait de la direction choisie.</p>
-<p id="p-11-59" class="">« Fille ordinaire » était presque un manifeste tranquille. Pas besoin d&#x27;arriver avec une chanson qui annonce « Regardez comme je suis devenue une star ». Le titre rappelait au contraire quelque chose de son image : la fille du Nord qui se retrouve dans une situation extraordinaire sans vouloir jouer à la célébrité permanente.</p>
-<p id="p-11-60" class="">Le morceau titre, lui, possède cette efficacité pop qui correspond assez bien au contraste Marine : une mélodie facile à retenir et, dessous, quelque chose de moins lisse.</p>
-<p id="p-11-61" class="">« Des gens bien », « M&#x27;aimer tout le temps », « Dalida », « Ce qu&#x27;il nous reste », « Que ça dure », « Restes d&#x27;averses », « Rappelle-toi », « D&#x27;accord », « Gemme », « À la maison » : chaque morceau ajoutait une petite pièce.</p>
-<p id="p-11-62" class="">Je ne voulais pas faire ce que font parfois les fans les plus enthousiastes : déclarer que chaque piste était un chef-d&#x27;œuvre absolu qui allait révolutionner la musique française.</p>
-<p id="p-11-63" class="">Ce n&#x27;est pas nécessaire.</p>
-<p id="p-11-64" class="">Un premier album a aussi le droit d&#x27;être un début.</p>
-<p id="p-11-65" class="">Il a le droit de chercher.</p>
-<p id="p-11-66" class="">Il a le droit de contenir des chansons qui toucheront certains plus que d&#x27;autres.</p>
-<p id="p-11-67" class="">Ce qui comptait à mes yeux, c&#x27;était qu&#x27;on puisse reconnaître une direction et une personnalité.</p>
-<p id="p-11-68" class="">La réédition deluxe de décembre 2025 a encore élargi cet univers avec plusieurs titres supplémentaires. Les collaborations ont montré que Marine commençait aussi à travailler avec des auteurs et compositeurs déjà bien installés dans la chanson française.</p>
-<p id="p-11-69" class="">Et puis les chiffres sont arrivés.</p>
-<p id="p-11-70" class="">Je me méfie des chiffres, alors même que je passe une partie de ma vie de créateur à les regarder.</p>
-<p id="p-11-71" class="">Ils sont utiles.</p>
-<p id="p-11-72" class="">Ils ne disent pas tout.</p>
-<p id="p-11-73" class="">Un million de vues ne prouve pas qu&#x27;une chanson est meilleure qu&#x27;une autre. Un disque de platine ne mesure pas l&#x27;intensité avec laquelle quelqu&#x27;un écoute un morceau seul dans sa voiture.</p>
-<p id="p-11-74" class="">Mais les chiffres disent tout de même une chose importante : des gens sont là.</p>
-<p id="p-11-75" class="">Beaucoup de gens.</p>
-<p id="p-11-76" class="">Lorsque le SNEP a certifié « Ma faute » diamant en décembre 2025 puis « Cœur maladroit » platine en janvier 2026, j&#x27;ai ressenti une satisfaction presque absurde.</p>
-<p id="p-11-77" class="">Je n&#x27;avais évidemment rien composé.</p>
-<p id="p-11-78" class="">Je n&#x27;avais rien produit.</p>
-<p id="p-11-79" class="">Je n&#x27;avais pas passé une seule nuit en studio.</p>
-<p id="p-11-80" class="">Et pourtant j&#x27;étais content.</p>
-<p id="p-11-81" class="">C&#x27;est le fameux illogisme du fan.</p>
-<p id="p-11-82" class="">Nous sommes fiers d&#x27;un travail qui n&#x27;est pas le nôtre.</p>
-<p id="p-11-83" class="">La seule chose que nous avons faite, c&#x27;est écouter.</p>
-<p id="p-11-84" class="">Et parfois acheter une place.</p>
-<p id="p-11-85" class="">Mais cette fidélité du public répondait à la question qui me préoccupait depuis la finale : est-ce que les gens resteraient ?</p>
-<p id="p-11-86" class="">Ils restaient.</p>
-<p id="p-11-87" class="">Mieux : de nouveaux auditeurs arrivaient qui n&#x27;avaient peut-être même pas regardé la Star Academy.</p>
-<p id="p-11-88" class="">C&#x27;est là qu&#x27;une carrière change vraiment de statut.</p>
-<p id="p-11-89" class="">Quand quelqu&#x27;un entend « Cœur maladroit » à la radio et l&#x27;aime sans savoir qui a gagné quoi l&#x27;année précédente.</p>
-<p id="p-11-90" class="">Quand une chanson devient plus célèbre que l&#x27;émission qui l&#x27;a aidée à décoller.</p>
-<p id="p-11-91" class="">Quand des billets se vendent parce que le nom « Marine » suffit.</p>
-<p id="p-11-92" class="">Moi, j&#x27;étais arrivé par la télévision.</p>
-<p id="p-11-93" class="">D&#x27;autres arriveraient par la musique.</p>
-<p id="p-11-94" class="">Et je trouvais ça très bien.</p>
-<p id="p-11-95" class="">Parce qu&#x27;un artiste ne peut pas vivre éternellement uniquement de la nostalgie de sa victoire.</p>
-<p id="p-11-96" class="">Il faut que le public oublie peu à peu le trophée et garde les chansons.</p>
-<p id="p-11-97" class="">C&#x27;est peut-être le plus beau compliment que l&#x27;on puisse faire à quelqu&#x27;un sorti d&#x27;un télé-crochet.</p>
-</section>
-<section class="chapter" id="sec-12" data-section="12">
-<div class="chapter-head">
-<div class="chapter-kicker">CHAPITRE 11</div>
-<h1>MONTPELLIER : DE L&#x27;ÉCRAN À LA SCÈNE</h1></div>
-<p id="p-12-0" class="first-para">Le 7 décembre 2025, Marine se produit au Corum de Montpellier, dans la salle Berlioz, dans le cadre de sa première tournée solo.</p>
-<p id="p-12-1" class="">Pour moi, la date était entourée depuis longtemps.</p>
-<p id="p-12-2" class="">Pas seulement parce que j&#x27;allais à un concert.</p>
-<p id="p-12-3" class="">Parce que c&#x27;était son concert.</p>
-<p id="p-12-4" class="">Pendant des mois, je l&#x27;avais regardée à travers des écrans de toutes tailles : télévision, téléphone, ordinateur. J&#x27;avais monté ses images, préparé des titres, choisi des extraits, répondu à des commentaires. J&#x27;avais entendu sa voix compressée par la télévision, le streaming, les réseaux sociaux.</p>
-<p id="p-12-5" class="">Une salle de concert enlève cette distance.</p>
-<p id="p-12-6" class="">Quand les lumières s&#x27;éteignent, il n&#x27;y a plus de bouton pause.</p>
-<p id="p-12-7" class="">Plus de montage.</p>
-<p id="p-12-8" class="">Plus de miniature.</p>
-<p id="p-12-9" class="">Il reste la scène.</p>
-<p id="p-12-10" class="">Et le public.</p>
-<p id="p-12-11" class="">Je me souviens surtout de l&#x27;attente.</p>
-<p id="p-12-12" class="">C&#x27;est une partie du concert que les vidéos ne montrent jamais vraiment : les conversations autour de vous, les gens qui se retournent à chaque mouvement de lumière, les téléphones qui apparaissent dès qu&#x27;une musique change, l&#x27;impression collective que « ça va commencer » pendant parfois beaucoup trop longtemps.</p>
-<p id="p-12-13" class="">Puis Marine arrive.</p>
-<p id="p-12-14" class="">Et là, quelque chose de très simple se produit.</p>
-<p id="p-12-15" class="">Elle existe en trois dimensions.</p>
-<p id="p-12-16" class="">Cette phrase a l&#x27;air idiote, mais tous ceux qui ont longtemps suivi un artiste uniquement à travers les médias connaissent cette sensation. On sait évidemment que la personne est réelle. On n&#x27;est pas fou.</p>
-<p id="p-12-17" class="">Mais la voir occuper physiquement une scène, entendre la voix traverser la salle, sentir les réactions autour de soi, ça change l&#x27;échelle.</p>
-<p id="p-12-18" class="">Je filme quelques instants.</p>
-<p id="p-12-19" class="">Évidemment.</p>
-<p id="p-12-20" class="">Le Grognard n&#x27;allait pas soudainement découvrir la méditation pleine conscience.</p>
-<p id="p-12-21" class="">J&#x27;ai notamment gardé des images de son arrivée sur scène et de « Cœur maladroit » en live. Ces vidéos sont devenues, elles aussi, une partie de mon histoire de fan.</p>
-<p id="p-12-22" class="">Mais j&#x27;ai essayé de ne pas vivre tout le concert à travers mon téléphone.</p>
-<p id="p-12-23" class="">Il faut parfois accepter de ne pas tout archiver.</p>
-<p id="p-12-24" class="">Sinon on finit avec quatre-vingt-dix minutes de vidéo et aucun souvenir réel.</p>
-<p id="p-12-25" class="">Sur scène, je retrouve ce qui m&#x27;avait plu au château, mais transformé.</p>
-<p id="p-12-26" class="">L&#x27;humour est toujours là.</p>
-<p id="p-12-27" class="">La spontanéité aussi.</p>
-<p id="p-12-28" class="">La puissance vocale, évidemment.</p>
-<p id="p-12-29" class="">Mais ce n&#x27;est plus une candidate qui doit prouver quelque chose aux professeurs ou attendre les votes du public.</p>
-<p id="p-12-30" class="">C&#x27;est son spectacle.</p>
-<p id="p-12-31" class="">Ses chansons.</p>
-<p id="p-12-32" class="">Son univers.</p>
-<p id="p-12-33" class="">Cette différence est immense.</p>
-<p id="p-12-34" class="">Pendant la Star Academy, même lorsqu&#x27;un candidat est au centre d&#x27;un tableau, il habite un décor qui ne lui appartient pas.</p>
-<p id="p-12-35" class="">En tournée solo, tout est une déclaration : l&#x27;ordre des titres, les arrangements, les lumières, les moments parlés, les silences.</p>
-<p id="p-12-36" class="">Je regardais Marine et je pensais au chemin parcouru en un peu plus d&#x27;un an.</p>
-<p id="p-12-37" class="">Octobre 2024 : une candidate entre sur un plateau et chante « Ordinaire ».</p>
-<p id="p-12-38" class="">Décembre 2025 : des centaines puis des milliers de personnes ont acheté un billet uniquement pour elle.</p>
-<p id="p-12-39" class="">Entre les deux, un château, une victoire, une tournée collective, un album, des certifications, des heures de studio et probablement une quantité de sommeil beaucoup trop faible.</p>
-<p id="p-12-40" class="">J&#x27;avais suivi presque chaque étape publique.</p>
-<p id="p-12-41" class="">Et pourtant, la scène réussissait encore à me surprendre.</p>
-<p id="p-12-42" class="">Parce qu&#x27;une vidéo ne transmet jamais exactement une voix.</p>
-<p id="p-12-43" class="">Elle transmet une reproduction.</p>
-<p id="p-12-44" class="">Dans la salle, les graves existent dans le corps. Les grandes notes prennent de l&#x27;espace. Les défauts éventuels aussi, et c&#x27;est très bien : le live est vivant précisément parce qu&#x27;il n&#x27;est pas un fichier audio parfaitement nettoyé.</p>
-<p id="p-12-45" class="">Ce soir-là, je n&#x27;avais pas besoin de rencontrer Marine pour que le moment compte.</p>
-<p id="p-12-46" class="">Je n&#x27;avais pas besoin d&#x27;une photo bras dessus bras dessous ou d&#x27;une conversation inventée après coup.</p>
-<p id="p-12-47" class="">J&#x27;avais attendu de la voir sur scène.</p>
-<p id="p-12-48" class="">Je la voyais.</p>
-<p id="p-12-49" class="">C&#x27;était suffisant.</p>
-<p id="p-12-50" class="">Et cette idée est importante pour moi, surtout dans un livre de fan.</p>
-<p id="p-12-51" class="">Nous confondons parfois proximité et possession.</p>
-<p id="p-12-52" class="">Parce qu&#x27;un artiste répond à un commentaire, signe un autographe ou apparaît quelques secondes à côté de nous, on peut avoir l&#x27;impression qu&#x27;un lien personnel s&#x27;est créé.</p>
-<p id="p-12-53" class="">Parfois oui.</p>
-<p id="p-12-54" class="">Souvent non.</p>
-<p id="p-12-55" class="">Et ce n&#x27;est pas grave.</p>
-<p id="p-12-56" class="">Marine ne me devait rien.</p>
-<p id="p-12-57" class="">Je n&#x27;avais pas besoin qu&#x27;elle sache qui j&#x27;étais pour que ce qu&#x27;elle avait déclenché chez moi soit réel.</p>
-<p id="p-12-58" class="">Mes vidéos étaient réelles.</p>
-<p id="p-12-59" class="">Mes chansons de fan étaient réelles.</p>
-<p id="p-12-60" class="">Le site que j&#x27;avais développé autour de mes contenus était réel.</p>
-<p id="p-12-61" class="">Le billet dans ma poche était réel.</p>
-<p id="p-12-62" class="">L&#x27;émotion dans la salle aussi.</p>
-<p id="p-12-63" class="">C&#x27;est peut-être ça, finalement, le passage de l&#x27;écran à la scène.</p>
-<p id="p-12-64" class="">Pas devenir proche de l&#x27;artiste.</p>
-<p id="p-12-65" class="">Réaliser que ce que l&#x27;on suivait à distance a suffisamment compté pour nous faire nous déplacer, attendre, écouter et rentrer chez nous avec quelques chansons qui sonnent différemment qu&#x27;avant.</p>
-<p id="p-12-66" class="">Après Montpellier, je n&#x27;étais pas « encore plus propriétaire » de mon statut de fan.</p>
-<p id="p-12-67" class="">J&#x27;étais simplement heureux.</p>
-<p id="p-12-68" class="">Et c&#x27;était largement assez.</p>
-</section>
-<section class="chapter" id="sec-13" data-section="13">
-<div class="chapter-head">
-<div class="chapter-kicker">CHAPITRE 12</div>
-<h1>MARINE APRÈS MARINE</h1></div>
-<p id="p-13-0" class="first-para">Il y a un moment que tous les artistes issus d&#x27;une émission doivent affronter.</p>
-<p id="p-13-1" class="">Le jour où le public cesse de comparer chaque nouveau pas au programme qui les a révélés.</p>
-<p id="p-13-2" class="">Pour Marine, ce passage s&#x27;est fait progressivement.</p>
-<p id="p-13-3" class="">En 2025, elle était encore partout présentée comme « la gagnante de la Star Academy ».</p>
-<p id="p-13-4" class="">C&#x27;était logique.</p>
-<p id="p-13-5" class="">En 2026, autre chose s&#x27;est installé.</p>
-<p id="p-13-6" class="">L&#x27;album « Cœur maladroit » a été certifié platine en janvier. « Ma faute » était déjà devenue diamant. La tournée solo s&#x27;est prolongée, avec de nouvelles dates ajoutées jusque dans 2027. Marine n&#x27;était plus en train d&#x27;essayer de prouver qu&#x27;elle pouvait exister après l&#x27;émission.</p>
-<p id="p-13-7" class="">Elle existait.</p>
-<p id="p-13-8" class="">L&#x27;année 2026 a continué d&#x27;ajouter des morceaux à cette identité.</p>
-<p id="p-13-9" class="">« Escroc », présent dans l&#x27;édition deluxe, a poursuivi sa vie en single. Elle a aussi participé au titre « On m&#x27;avait dit » avec Félix Radu au printemps.</p>
-<p id="p-13-10" class="">Puis, le 4 septembre 2026, un nouveau single est arrivé : « Tricheur ».</p>
-<p id="p-13-11" class="">Au moment où j&#x27;écris ces lignes, il est encore récent.</p>
-<p id="p-13-12" class="">C&#x27;est aussi pour cela que je ne veux pas terminer ce livre comme on referme une biographie achevée.</p>
-<p id="p-13-13" class="">Marine a vingt-six ans.</p>
-<p id="p-13-14" class="">Son histoire professionnelle commence à peine.</p>
-<p id="p-13-15" class="">Elle a déjà connu plus de choses en deux ans que beaucoup de gens en dix : une émission nationale, une victoire, des tournées, un album platine, des singles certifiés, des scènes de plus en plus grandes.</p>
-<p id="p-13-16" class="">Mais la partie la plus intéressante reste peut-être devant elle.</p>
-<p id="p-13-17" class="">Que fera-t-elle lorsqu&#x27;elle n&#x27;aura plus du tout besoin de l&#x27;étiquette Star Academy ?</p>
-<p id="p-13-18" class="">Quelles chansons gardera-t-elle dans dix ans ?</p>
-<p id="p-13-19" class="">Lesquelles regardera-t-elle avec tendresse en disant qu&#x27;elle était encore en train de chercher ?</p>
-<p id="p-13-20" class="">Quel public restera ?</p>
-<p id="p-13-21" class="">Je n&#x27;en sais rien.</p>
-<p id="p-13-22" class="">Et c&#x27;est précisément ce qui me plaît.</p>
-<p id="p-13-23" class="">Être fan n&#x27;est pas connaître la fin.</p>
-<p id="p-13-24" class="">C&#x27;est avoir envie de voir la suite.</p>
-<p id="p-13-25" class="">De mon côté, Marine a déjà laissé une trace qui ne dépend pas de son prochain classement.</p>
-<p id="p-13-26" class="">Elle a changé ma manière de créer du contenu.</p>
-<p id="p-13-27" class="">Elle m&#x27;a donné envie de faire des vidéos plus longues, plus racontées, moins obsédées par la simple actualité.</p>
-<p id="p-13-28" class="">Elle m&#x27;a poussé à travailler des chansons-hommages sans copier, à réfléchir à la frontière entre inspiration et imitation.</p>
-<p id="p-13-29" class="">Elle a pris une place sur mon site, dans mes montages, dans mes projets.</p>
-<p id="p-13-30" class="">Et, surtout, elle m&#x27;a rappelé quelque chose que j&#x27;avais un peu oublié : on peut encore être surpris par un artiste.</p>
-<p id="p-13-31" class="">Même après quarante ans.</p>
-<p id="p-13-32" class="">Même après avoir vu des dizaines de saisons de télé-crochets.</p>
-<p id="p-13-33" class="">Même lorsqu&#x27;on croit connaître toutes les mécaniques.</p>
-<p id="p-13-34" class="">La surprise ne vient pas forcément d&#x27;une note que personne d&#x27;autre ne peut chanter.</p>
-<p id="p-13-35" class="">Elle peut venir d&#x27;un ensemble beaucoup plus fragile.</p>
-<p id="p-13-36" class="">Une voix.</p>
-<p id="p-13-37" class="">Un rire.</p>
-<p id="p-13-38" class="">Une façon de douter.</p>
-<p id="p-13-39" class="">Une chanson écrite avant que le succès arrive.</p>
-<p id="p-13-40" class="">Une imitation de train parfaitement inutile.</p>
-<p id="p-13-41" class="">Une phrase lancée à sa mère au moment de gagner.</p>
-<p id="p-13-42" class="">Une salle de concert à Montpellier.</p>
-<p id="p-13-43" class="">Et l&#x27;impression, au milieu de tout ça, qu&#x27;une artiste n&#x27;essaie pas trop fort de devenir quelqu&#x27;un d&#x27;autre.</p>
-<p id="p-13-44" class="">C&#x27;est peut-être le mot qui résume le mieux ce que j&#x27;aime chez Marine : sincérité.</p>
-<p id="p-13-45" class="">Pas une sincérité parfaite, parce que personne n&#x27;est transparent en permanence. Marine a son image publique, son métier, ses choix de communication, comme tous les artistes.</p>
-<p id="p-13-46" class="">Mais quelque chose passe.</p>
-<p id="p-13-47" class="">Une maladresse parfois.</p>
-<p id="p-13-48" class="">Un rire qui arrive trop tôt.</p>
-<p id="p-13-49" class="">Une émotion qu&#x27;on voit avant qu&#x27;elle ait eu le temps de la cacher.</p>
-<p id="p-13-50" class="">C&#x27;est cette impression qui m&#x27;a accroché.</p>
-<p id="p-13-51" class="">Et je crois que c&#x27;est aussi ce que j&#x27;ai essayé de préserver dans mes propres créations autour d&#x27;elle.</p>
-<p id="p-13-52" class="">Ne jamais la transformer en statue.</p>
-<p id="p-13-53" class="">Une statue ne doute pas.</p>
-<p id="p-13-54" class="">Une statue ne se trompe pas.</p>
-<p id="p-13-55" class="">Une statue ne fait pas le klaxon du TGV.</p>
-<p id="p-13-56" class="">Marine, si.</p>
-<p id="p-13-57" class="">Heureusement.</p>
-<p id="p-13-58" class="">Il y a enfin une dimension dont je ne parle pas assez : ce que cette histoire dit de moi.</p>
-<p id="p-13-59" class="">C&#x27;est pourtant la seule partie sur laquelle je peux être absolument certain.</p>
-<p id="p-13-60" class="">Je ne sais pas ce que Marine ressent lorsqu&#x27;une salle reprend ses chansons.</p>
-<p id="p-13-61" class="">Je ne sais pas ce qu&#x27;elle pense quand elle voit un montage fait par un fan.</p>
-<p id="p-13-62" class="">Je ne sais pas si elle a déjà croisé l&#x27;une de mes vidéos et, si c&#x27;est le cas, si elle a regardé dix secondes ou jusqu&#x27;à la fin.</p>
-<p id="p-13-63" class="">Mais je sais ce que moi j&#x27;ai ressenti.</p>
-<p id="p-13-64" class="">Au début, j&#x27;avais presque tendance à justifier mon enthousiasme.</p>
-<p id="p-13-65" class="">Parce que j&#x27;ai quarante-cinq ans.</p>
-<p id="p-13-66" class="">Parce qu&#x27;il existe cette idée un peu bête selon laquelle, passé un certain âge, il faudrait devenir raisonnable jusque dans ce que l&#x27;on aime.</p>
-<p id="p-13-67" class="">On aurait le droit d&#x27;être passionné par le vin, une voiture ancienne, le bricolage ou le football. Mais dire qu&#x27;une chanteuse révélée par la Star Academy vous touche énormément, cela provoquerait parfois ce petit sourire amusé : « Ah oui, quand même. »</p>
-<p id="p-13-68" class="">Eh bien oui.</p>
-<p id="p-13-69" class="">Quand même.</p>
-<p id="p-13-70" class="">Pourquoi faudrait-il une date de péremption à l&#x27;enthousiasme ?</p>
-<p id="p-13-71" class="">Je n&#x27;ai pas quinze ans.</p>
-<p id="p-13-72" class="">Je ne confonds pas une artiste et une amie.</p>
-<p id="p-13-73" class="">Je ne construis pas ma vie autour de l&#x27;espoir qu&#x27;elle me remarque.</p>
-<p id="p-13-74" class="">Je sais parfaitement que Marine ne chante pas pour moi personnellement.</p>
-<p id="p-13-75" class="">Tout cela n&#x27;empêche pas une voix de provoquer quelque chose.</p>
-<p id="p-13-76" class="">Au contraire, peut-être qu&#x27;à quarante-cinq ans on comprend mieux la valeur des choses qui réussissent encore à nous surprendre.</p>
-<p id="p-13-77" class="">Nous accumulons des habitudes.</p>
-<p id="p-13-78" class="">Nous avons déjà entendu des milliers de chansons.</p>
-<p id="p-13-79" class="">Nous connaissons les ficelles des émissions.</p>
-<p id="p-13-80" class="">Nous savons qu&#x27;une finale est montée pour créer du suspense, qu&#x27;une interview est préparée, qu&#x27;un clip est une production, qu&#x27;une carrière est aussi une industrie.</p>
-<p id="p-13-81" class="">Et malgré cette connaissance, parfois l&#x27;émotion passe quand même.</p>
-<p id="p-13-82" class="">C&#x27;est ça qui est beau.</p>
-<p id="p-13-83" class="">Marine n&#x27;a pas effacé mon esprit critique.</p>
-<p id="p-13-84" class="">Elle l&#x27;a traversé.</p>
-<p id="p-13-85" class="">Je peux savoir comment fonctionne la télévision et être touché par une prestation.</p>
-<p id="p-13-86" class="">Je peux connaître les stratégies de communication et trouver une interview drôle.</p>
-<p id="p-13-87" class="">Je peux comprendre qu&#x27;un concert est un spectacle parfaitement préparé et avoir des frissons quand les lumières s&#x27;éteignent.</p>
-<p id="p-13-88" class="">La lucidité et l&#x27;émotion ne sont pas ennemies.</p>
-<p id="p-13-89" class="">Elles peuvent très bien s&#x27;asseoir côte à côte.</p>
-<p id="p-13-90" class="">C&#x27;est d&#x27;ailleurs ce que j&#x27;aimerais que ce livre transmette.</p>
-<p id="p-13-91" class="">Il ne faut pas être naïf pour être fan.</p>
-<p id="p-13-92" class="">Il suffit d&#x27;accepter qu&#x27;une partie de nous n&#x27;a pas besoin de tout mesurer.</p>
-<p id="p-13-93" class="">Cette aventure a aussi accompagné une transformation de mon travail de créateur.</p>
-<p id="p-13-94" class="">Quand j&#x27;ai lancé Le Grognard du Net, je testais beaucoup de choses. La chaîne était un terrain de jeu. Je pouvais passer d&#x27;un sujet à un autre, chercher ce qui plaisait, apprendre le montage, comprendre les titres, les miniatures, la durée d&#x27;attention.</p>
-<p id="p-13-95" class="">Avec Marine, j&#x27;ai commencé à penser davantage en histoires.</p>
-<p id="p-13-96" class="">Une vidéo n&#x27;était plus seulement « une information + une réaction ».</p>
-<p id="p-13-97" class="">Elle pouvait avoir un début, une attente, un souvenir, une conclusion.</p>
-<p id="p-13-98" class="">Je pouvais relier le passé et le présent.</p>
-<p id="p-13-99" class="">Parler de l&#x27;adolescente de The Voice Kids puis de la jeune femme devant des dizaines de milliers de personnes.</p>
-<p id="p-13-100" class="">Montrer une ancienne chanson puis la retrouver quelques années plus tard certifiée.</p>
-<p id="p-13-101" class="">Raconter la candidate avant de montrer l&#x27;artiste.</p>
-<p id="p-13-102" class="">C&#x27;est probablement pour ça que j&#x27;ai fini par vouloir écrire ce livre.</p>
-<p id="p-13-103" class="">À force de raconter Marine en vidéos de trente secondes, une minute, cinq minutes ou dix-huit minutes, j&#x27;avais envie d&#x27;un format qui ne soit pas pressé.</p>
-<p id="p-13-104" class="">Un livre ne vous demande pas de placer l&#x27;information importante avant les trois premières secondes pour empêcher le lecteur de « swiper ».</p>
-<p id="p-13-105" class="">Enfin, normalement.</p>
-<p id="p-13-106" class="">Dans un livre, on peut prendre le temps.</p>
-<p id="p-13-107" class="">On peut raconter le silence avant une chanson.</p>
-<p id="p-13-108" class="">On peut revenir en 2001.</p>
-<p id="p-13-109" class="">On peut parler de Grégory, de Jenifer, du retour de l&#x27;émission, puis attendre plusieurs chapitres avant que Marine entre vraiment dans l&#x27;histoire.</p>
-<p id="p-13-110" class="">On peut montrer que mon admiration n&#x27;est pas apparue dans le vide.</p>
-<p id="p-13-111" class="">Elle s&#x27;inscrit dans vingt-cinq ans de télévision, de musique et de souvenirs.</p>
-<p id="p-13-112" class="">C&#x27;est ce qui la rend, pour moi, différente.</p>
-<p id="p-13-113" class="">Marine n&#x27;est pas « la première chanteuse que j&#x27;ai aimée ».</p>
-<p id="p-13-114" class="">Ce serait absurde.</p>
-<p id="p-13-115" class="">Elle est la première depuis très longtemps à avoir transformé mon regard de spectateur en désir de créer autour d&#x27;une artiste de cette manière-là.</p>
-<p id="p-13-116" class="">Ce n&#x27;est pas la même chose.</p>
-<p id="p-13-117" class="">Et cette nuance explique presque tout.</p>
-<p id="p-13-118" class="">Je me suis parfois demandé combien de temps cela durerait.</p>
-<p id="p-13-119" class="">Une saison ?</p>
-<p id="p-13-120" class="">La tournée ?</p>
-<p id="p-13-121" class="">Le premier album ?</p>
-<p id="p-13-122" class="">Puis 2026 est arrivé.</p>
-<p id="p-13-123" class="">Je continuais d&#x27;écouter.</p>
-<p id="p-13-124" class="">Je continuais de suivre.</p>
-<p id="p-13-125" class="">Je continuais de créer.</p>
-<p id="p-13-126" class="">Alors j&#x27;ai arrêté de me poser la question.</p>
-<p id="p-13-127" class="">Une passion n&#x27;a pas besoin de signer un contrat de durée.</p>
-<p id="p-13-128" class="">Elle dure tant qu&#x27;elle dure.</p>
-<p id="p-13-129" class="">Et lorsqu&#x27;elle laisse quelque chose derrière elle, même si elle change un jour de forme, elle n&#x27;a pas été inutile.</p>
-<p id="p-13-130" class="">Aujourd&#x27;hui, le souvenir le plus précieux n&#x27;est même pas un chiffre de vues, un classement ou une certification.</p>
-<p id="p-13-131" class="">C&#x27;est le chemin.</p>
-<p id="p-13-132" class="">Le fait d&#x27;avoir vu « Ma faute » passer d&#x27;une chanson ancienne que les nouveaux fans découvraient à un titre massivement écouté.</p>
-<p id="p-13-133" class="">Le fait d&#x27;avoir vu Marine passer du château à Bollaert, puis du collectif Star Academy à sa propre tournée.</p>
-<p id="p-13-134" class="">Le fait d&#x27;avoir été à Montpellier et de constater physiquement que toutes ces personnes que je voyais commenter sous mes vidéos existaient quelque part dans une salle, autour de moi.</p>
-<p id="p-13-135" class="">Internet donne parfois l&#x27;impression que le public est une abstraction.</p>
-<p id="p-13-136" class="">Un nombre.</p>
-<p id="p-13-137" class="">Une courbe.</p>
-<p id="p-13-138" class="">Un pourcentage de rétention.</p>
-<p id="p-13-139" class="">Dans une salle, le public respire.</p>
-<p id="p-13-140" class="">Il chante faux parfois.</p>
-<p id="p-13-141" class="">Il crie trop fort.</p>
-<p id="p-13-142" class="">Il lève son téléphone exactement au moment où vous auriez aimé voir la scène.</p>
-<p id="p-13-143" class="">Il rit.</p>
-<p id="p-13-144" class="">Il se tait.</p>
-<p id="p-13-145" class="">Il applaudit.</p>
-<p id="p-13-146" class="">Et soudain, toutes les statistiques reprennent une forme humaine.</p>
-<p id="p-13-147" class="">C&#x27;est peut-être ce que j&#x27;ai préféré dans le passage de l&#x27;écran à la scène.</p>
-<p id="p-13-148" class="">Pas seulement voir Marine.</p>
-<p id="p-13-149" class="">Voir les fans.</p>
-<p id="p-13-150" class="">Comprendre que cette aventure que je vivais chez moi, avec mes vidéos et mon écran, était partagée par des gens de tous âges et de tous horizons.</p>
-<p id="p-13-151" class="">Nous n&#x27;avions pas tous la même raison d&#x27;être là.</p>
-<p id="p-13-152" class="">Certains avaient découvert Marine à la première seconde de la Star Academy.</p>
-<p id="p-13-153" class="">D&#x27;autres avec « Ma faute ».</p>
-<p id="p-13-154" class="">D&#x27;autres avec « Cœur maladroit » à la radio.</p>
-<p id="p-13-155" class="">Certains étaient venus avec leurs enfants.</p>
-<p id="p-13-156" class="">D&#x27;autres entre amis.</p>
-<p id="p-13-157" class="">Moi, j&#x27;étais Le Grognard du Net, quarante-cinq ans, un téléphone prêt à filmer deux ou trois séquences, et le sourire d&#x27;un type qui avait fini par admettre l&#x27;évidence.</p>
-<p id="p-13-158" class="">Oui, j&#x27;étais fan.</p>
-<p id="p-13-159" class="">Et non, ce n&#x27;était pas un problème.</p>
-<p id="p-13-160" class="">C&#x27;était même plutôt une chance.</p>
-</section>
-<section class="chapter" id="sec-14" data-section="14">
-<div class="chapter-head">
-<div class="chapter-kicker">ÉPILOGUE</div>
-<h1>À MARINE</h1></div>
-<p id="p-14-0" class="first-para">Tu ne me connais probablement pas.</p>
-<p id="p-14-1" class="">Ou peut-être as-tu déjà croisé le nom Le Grognard du Net au détour d&#x27;une vidéo, d&#x27;un titre, d&#x27;un commentaire ou d&#x27;une de ces créations que je publie depuis que ta voix a décidé de compliquer mon statut de simple téléspectateur.</p>
-<p id="p-14-2" class="">Ce n&#x27;est pas très important.</p>
-<p id="p-14-3" class="">Je n&#x27;ai pas écrit ce livre pour entrer dans ta vie.</p>
-<p id="p-14-4" class="">Je l&#x27;ai écrit pour raconter la place que ta musique a prise dans la mienne.</p>
-<p id="p-14-5" class="">J&#x27;avais vingt ans quand la Star Academy a commencé.</p>
-<p id="p-14-6" class="">J&#x27;en ai quarante-cinq aujourd&#x27;hui.</p>
-<p id="p-14-7" class="">Entre les deux, j&#x27;ai vu passer des dizaines de candidats, des gagnants, des voix extraordinaires, des carrières immenses et d&#x27;autres plus discrètes.</p>
-<p id="p-14-8" class="">J&#x27;ai aimé Jenifer.</p>
-<p id="p-14-9" class="">J&#x27;ai été profondément marqué par Grégory Lemarchal.</p>
-<p id="p-14-10" class="">J&#x27;ai suivi le retour de l&#x27;émission, Anisha, Pierre Garnier, Helena et beaucoup d&#x27;autres.</p>
-<p id="p-14-11" class="">Puis tu es arrivée.</p>
-<p id="p-14-12" class="">Je ne sais pas exactement quand je suis devenu fan.</p>
-<p id="p-14-13" class="">Peut-être qu&#x27;il n&#x27;y a pas eu un moment.</p>
-<p id="p-14-14" class="">Peut-être que c&#x27;était une addition de petites choses.</p>
-<p id="p-14-15" class="">Une première chanson.</p>
-<p id="p-14-16" class="">Un doute.</p>
-<p id="p-14-17" class="">Une grande note.</p>
-<p id="p-14-18" class="">Une blague.</p>
-<p id="p-14-19" class="">« Ma faute ».</p>
-<p id="p-14-20" class="">Une finale.</p>
-<p id="p-14-21" class="">« Maman, j&#x27;ai gagné. »</p>
-<p id="p-14-22" class="">Puis la suite.</p>
-<p id="p-14-23" class="">J&#x27;ai fait des vidéos.</p>
-<p id="p-14-24" class="">Beaucoup.</p>
-<p id="p-14-25" class="">J&#x27;ai raconté ton parcours à ma manière. J&#x27;ai parfois défendu ce que j&#x27;aimais chez toi. J&#x27;ai parfois simplement ri d&#x27;un moment drôle. J&#x27;ai créé des chansons inspirées par ce que ton aventure réveillait chez moi, avec une règle à laquelle je tiens : ne jamais te copier, ne jamais faire croire que ta voix était la mienne ou que la mienne était la tienne.</p>
-<p id="p-14-26" class="">Puis je t&#x27;ai vue sur scène à Montpellier.</p>
-<p id="p-14-27" class="">Et l&#x27;écran est devenu une salle.</p>
-<p id="p-14-28" class="">Je ne sais pas ce que ta carrière sera dans cinq ans, dix ans ou vingt ans.</p>
-<p id="p-14-29" class="">Je ne sais pas quelles chansons tu chanteras encore, ni lesquelles tu auras remplacées par d&#x27;autres.</p>
-<p id="p-14-30" class="">Mais je sais une chose.</p>
-<p id="p-14-31" class="">Pendant une période de ma vie où je pensais qu&#x27;une émission de télévision ne pouvait plus vraiment me surprendre, tu l&#x27;as fait.</p>
-<p id="p-14-32" class="">Tu m&#x27;as rappelé qu&#x27;on peut avoir quarante-cinq ans et attendre une chanson avec impatience.</p>
-<p id="p-14-33" class="">Qu&#x27;on peut créer simplement parce qu&#x27;on a envie de transmettre une émotion.</p>
-<p id="p-14-34" class="">Qu&#x27;on peut être fan sans perdre son recul.</p>
-<p id="p-14-35" class="">Et qu&#x27;un Grognard peut, de temps en temps, arrêter de grogner pour écouter.</p>
-<p id="p-14-36" class="">Alors merci.</p>
-<p id="p-14-37" class="">Pas pour être parfaite.</p>
-<p id="p-14-38" class="">Surtout pas.</p>
-<p id="p-14-39" class="">Merci pour les maladresses, les doutes, les rires, les chansons et tout ce qui reste encore à écrire.</p>
-<p id="p-14-40" class="">Je ne sais pas jusqu&#x27;où ira ton histoire.</p>
-<p id="p-14-41" class="">Je sais simplement à quel moment elle est entrée dans la mienne.</p>
-<p id="p-14-42" class="">Et puis Marine a chanté.</p>
-<p id="p-14-43" class="">Le reste, finalement, est venu tout seul.</p>
-<p id="p-14-44" class="">FIN</p>
-<p id="p-14-45" class="">REPÈRES DOCUMENTAIRES</p>
-<p id="p-14-46" class="">Les faits publics du récit ont été vérifiés à partir de sources accessibles au public. Cette page est destinée à la révision éditoriale et pourra être adaptée ou retirée dans l’édition finale.</p>
-<p id="p-14-47" class="">• TF1 Info, « Marine remporte la finale de la Star Academy, l’histoire d’une formidable revanche », 26 janvier 2025.</p>
-<p id="p-14-48" class="">• TF1 Info, entretien avec Marine au lendemain de sa victoire, 26 janvier 2025.</p>
-<p id="p-14-49" class="">• TF1 Info, « Je n’aimerais pas trop revenir à il y a un an : Marine raconte son rêve éveillé dans Sept à Huit », 24 août 2025.</p>
-<p id="p-14-50" class="">• TF1 Info, dossiers Star Academy 2022, 2023 et 2024 ; historique des gagnants.</p>
-<p id="p-14-51" class="">• Groupe TF1, historique du lancement de Star Academy en 2001.</p>
-<p id="p-14-52" class="">• Sony Music Entertainment France, « Au Nord c’était les Corons », 28 février 2025.</p>
-<p id="p-14-53" class="">• SNEP, certifications : « Ma faute » (diamant, décembre 2025), « Cœur maladroit » (single or, octobre 2025) et album « Cœur maladroit » (platine, janvier 2026).</p>
-<p id="p-14-54" class="">• Qobuz / Columbia – Sony Music Entertainment France, crédits et date de sortie de l’album « Cœur maladroit » (27 juin 2025).</p>
-<p id="p-14-55" class="">• Qobuz / Columbia – Sony Music Entertainment France, « Tricheur », paru le 4 septembre 2026.</p>
-<p id="p-14-56" class="">• Montpellier Events / Le Corum, fiche du concert de Marine à Montpellier du 7 décembre 2025.</p>
-<p id="p-14-57" class="">• L’Équipe et RC Lens, prestation de Marine sur « Les Corons » au stade Bollaert-Delelis, 16 février 2025.</p>
-<p id="p-14-58" class="">État des informations : 1er octobre 2026.</p>
-</section>
-          </div>
-        </div>
-      </article>
-    </div>
-    <nav class="nav" aria-label="Navigation des pages">
-      <button id="prevBtn">← Précédent</button>
-      <div class="counter" id="pageCounter">Couverture</div>
-      <button class="next" id="nextBtn">Suivant →</button>
-    </nav>
-    <div class="progress-wrap">
-      <div class="progress"><span id="progressBar"></span></div>
-      <div class="progress-label"><span id="chapterLabel">Couverture</span><span id="percentLabel">0 %</span></div>
-    </div>
-  </main>
-</div>
-
-<button class="fs-exit" id="fsExit" aria-label="Quitter le plein écran">✕</button>
-<div class="drawer-backdrop" id="backdrop"></div>
-
-<aside class="drawer" id="chaptersDrawer">
-  <div class="drawer-head"><h2>Chapitres</h2><button class="close-btn" data-close>×</button></div>
-  <div class="drawer-body">
-    <div class="badge">Récit complet</div>
-    <div style="height:10px"></div>
-    <div class="chapter-list" id="chapterList"></div>
-  </div>
-</aside>
-
-<aside class="drawer" id="settingsDrawer">
-  <div class="drawer-head"><h2>Confort de lecture</h2><button class="close-btn" data-close>×</button></div>
-  <div class="drawer-body">
-    <div class="setting"><label>Fond</label><div class="theme-choice">
-      <button type="button" data-theme="white">Blanc</button>
-      <button type="button" data-theme="ivory">Ivoire</button>
-    </div></div>
-    <div class="setting"><label for="fontSize">Taille du texte</label><div class="range-row"><span>A</span><input id="fontSize" type="range" min="16" max="25" value="19"><span>A+</span></div></div>
-    <div class="setting"><label for="lineHeight">Interligne</label><input id="lineHeight" type="range" min="1.45" max="2.05" step=".05" value="1.72" style="width:100%"></div>
-    <button id="resetReading" style="width:100%;padding:11px;border-radius:10px;border:1px solid var(--border);background:var(--panel)">Revenir à la couverture</button>
-  </div>
-</aside>
-
-<aside class="drawer" id="audioDrawer">
-  <div class="drawer-head"><h2>Lecture audio</h2><button class="close-btn" data-close>×</button></div>
-  <div class="drawer-body">
-    <p class="audio-status" id="audioStatus">Lecture vocale en français à partir de la page affichée.</p>
-    <div class="setting"><label for="voiceSelect">Voix</label><select id="voiceSelect" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--paper)"></select></div>
-    <div class="setting"><label for="speechRate">Vitesse</label><input id="speechRate" type="range" min=".75" max="1.25" step=".05" value=".95" style="width:100%"></div>
-    <div class="audio-actions">
-      <button id="audioPlay">▶ Lire la page</button>
-      <button id="audioPause">⏸ Pause / Reprendre</button>
-      <button id="audioStop">■ Arrêter</button>
-    </div>
-  </div>
-</aside>
-
-<div class="toast" id="toast"></div>
-
-<script>
-(() => {
-  const CHAPTERS=[{"id": "sec-0", "heading": "NOTE AU LECTEUR"}, {"id": "sec-1", "heading": "PROLOGUE — JE N'AVAIS PAS PRÉVU DE DEVENIR FAN"}, {"id": "sec-2", "heading": "CHAPITRE 1 — AVANT MARINE, IL Y AVAIT DÉJÀ LE CHÂTEAU"}, {"id": "sec-3", "heading": "CHAPITRE 2 — GRÉGORY, LE PREMIER CHOC"}, {"id": "sec-4", "heading": "CHAPITRE 3 — LE RETOUR DU CHÂTEAU, SANS LE COUP DE FOUDRE"}, {"id": "sec-5", "heading": "CHAPITRE 4 — UNE VOIX « ORDINAIRE » QUI NE L'ÉTAIT PAS"}, {"id": "sec-6", "heading": "CHAPITRE 5 — AVANT LE CHÂTEAU, UNE FILLE DU NORD QUI N'A PAS ARRÊTÉ D'ESSAYER"}, {"id": "sec-7", "heading": "CHAPITRE 6 — LE CHÂTEAU, LES DOUTES ET LE KLAXON DU TGV"}, {"id": "sec-8", "heading": "CHAPITRE 7 — QUAND LE SPECTATEUR DEVIENT FAN"}, {"id": "sec-9", "heading": "CHAPITRE 8 — LE GROGNARD SE MET À RACONTER MARINE"}, {"id": "sec-10", "heading": "CHAPITRE 9 — « MAMAN, J'AI GAGNÉ »"}, {"id": "sec-11", "heading": "CHAPITRE 10 — APRÈS LA FINALE, TOUT COMMENCE"}, {"id": "sec-12", "heading": "CHAPITRE 11 — MONTPELLIER : DE L'ÉCRAN À LA SCÈNE"}, {"id": "sec-13", "heading": "CHAPITRE 12 — MARINE APRÈS MARINE"}, {"id": "sec-14", "heading": "ÉPILOGUE — À MARINE"}];
-  const $=id=>document.getElementById(id);
-  const cover=$('coverPage'),reader=$('readerPage'),viewport=$('flowViewport'),flow=$('flowContent');
-  const prevBtn=$('prevBtn'),nextBtn=$('nextBtn'),counter=$('pageCounter'),progress=$('progressBar'),percent=$('percentLabel'),chapterLabel=$('chapterLabel');
-  const STORAGE={page:'marine.reader.page',theme:'marine.reader.theme',size:'marine.reader.size',line:'marine.reader.line',voice:'marine.reader.voice',rate:'marine.reader.rate'};
-  let current=Number(localStorage.getItem(STORAGE.page)||0), textPages=1, totalPages=2, immersive=false, voices=[];
-  const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
-  const showToast=t=>{const x=$('toast');x.textContent=t;x.classList.add('show');clearTimeout(x._t);x._t=setTimeout(()=>x.classList.remove('show'),1600)};
-  function closeDrawers(){document.querySelectorAll('.drawer').forEach(d=>d.classList.remove('open'));$('backdrop').classList.remove('open')}
-  function openDrawer(id){closeDrawers();$(id).classList.add('open');$('backdrop').classList.add('open')}
-  function computePages(preserve=true){
-    const ratio=textPages>1?clamp((current-1)/(textPages-1),0,1):0;
-    const wasHidden=getComputedStyle(reader).display==='none';
-    const previousVisibility=reader.style.visibility;
-    const previousPosition=reader.style.position;
-    if(wasHidden){
-      reader.style.display='block';
-      reader.style.visibility='hidden';
-      reader.style.position='absolute';
-      reader.style.left='0';
-      reader.style.right='0';
-      reader.style.pointerEvents='none';
-    }
-    const w=Math.max(1,viewport.clientWidth||reader.clientWidth||window.innerWidth||1);
-    flow.style.columnWidth=w+'px';
-    flow.style.width=w+'px';
-    void flow.offsetWidth;
-    textPages=Math.max(1,Math.ceil((flow.scrollWidth-1)/w));
-    totalPages=textPages+1;
-    if(wasHidden){
-      reader.style.display='none';
-      reader.style.visibility=previousVisibility;
-      reader.style.position=previousPosition;
-      reader.style.left='';
-      reader.style.right='';
-      reader.style.pointerEvents='';
-    }
-    if(current>0 && preserve) current=1+Math.round(ratio*Math.max(0,textPages-1));
-    current=clamp(current,0,textPages);
-    render(false);
-  }
-  function activeChapter(){
-    if(current===0)return -1;
-    const x=(current-1)*viewport.clientWidth+viewport.clientWidth*.35;
-    let found=0;
-    CHAPTERS.forEach((c,i)=>{const el=document.getElementById(c.id);if(el && el.offsetLeft<=x)found=i});
-    return found;
-  }
-  function render(save=true){
-    if(current===0){
-      cover.style.display='flex';reader.style.display='none';counter.textContent='Couverture';chapterLabel.textContent='Couverture';prevBtn.disabled=true;
-    }else{
-      cover.style.display='none';reader.style.display='block';
-      viewport.scrollLeft=(current-1)*viewport.clientWidth;
-      counter.textContent='Page '+current+' / '+textPages;
-      const ci=activeChapter();chapterLabel.textContent=ci>=0?CHAPTERS[ci].heading:'Lecture';
-      prevBtn.disabled=false;
-    }
-    nextBtn.disabled=current>=textPages;
-    const pct=textPages?Math.round(current/textPages*100):0;progress.style.width=pct+'%';percent.textContent=pct+' %';
-    document.querySelectorAll('.chapter-link').forEach((b,i)=>b.classList.toggle('active',i===activeChapter()));
-    if(save)localStorage.setItem(STORAGE.page,String(current));
-  }
-  function next(){if(current<textPages){current++;render()}}
-  function prev(){if(current>0){current--;render()}}
-  function jumpChapter(i){
-    const el=document.getElementById(CHAPTERS[i].id);if(!el)return;
-    current=1+Math.floor(el.offsetLeft/(viewport.clientWidth||1));render();closeDrawers();
-  }
-  function buildChapters(){
-    $('chapterList').innerHTML='';
-    CHAPTERS.forEach((c,i)=>{const b=document.createElement('button');b.className='chapter-link';b.textContent=c.heading;b.addEventListener('click',()=>jumpChapter(i));$('chapterList').appendChild(b)})
-  }
-  function setTheme(t){document.body.classList.remove('theme-white','theme-ivory');document.body.classList.add('theme-'+t);localStorage.setItem(STORAGE.theme,t);document.querySelectorAll('[data-theme]').forEach(b=>b.classList.toggle('selected',b.dataset.theme===t))}
-  function setSize(v){v=clamp(Number(v)||19,16,25);document.documentElement.style.setProperty('--reader-size',v+'px');$('fontSize').value=v;localStorage.setItem(STORAGE.size,v);requestAnimationFrame(()=>computePages(true))}
-  function setLine(v){v=clamp(Number(v)||1.72,1.45,2.05);document.documentElement.style.setProperty('--reader-line',v);$('lineHeight').value=v;localStorage.setItem(STORAGE.line,v);requestAnimationFrame(()=>computePages(true))}
-  function updateFullscreen(){
-    const active=!!document.fullscreenElement||immersive;
-    $('fullscreenBtn').textContent=active?'✕':'⛶';
-  }
-  async function toggleFullscreen(){
-    closeDrawers();
-    if(document.fullscreenElement){await document.exitFullscreen();return}
-    if(immersive){immersive=false;document.body.classList.remove('immersive');updateFullscreen();setTimeout(()=>computePages(true),250);return}
-    try{await document.documentElement.requestFullscreen({navigationUI:'hide'})}catch(e){immersive=true;document.body.classList.add('immersive');updateFullscreen();setTimeout(()=>computePages(true),250)}
-  }
-  function exitFullscreen(){
-    if(document.fullscreenElement)document.exitFullscreen();else{immersive=false;document.body.classList.remove('immersive');updateFullscreen();setTimeout(()=>computePages(true),250)}
-  }
-  function pageText(){
-    if(current===0)return '';
-    const vr=viewport.getBoundingClientRect();const parts=[];
-    flow.querySelectorAll('.chapter-head,p').forEach(el=>{
-      const r=el.getBoundingClientRect();
-      if(r.right>vr.left+8 && r.left<vr.right-8)parts.push(el.innerText.trim());
-    });
-    return parts.join(' ');
-  }
-  function loadVoices(){
-    voices=speechSynthesis.getVoices().filter(v=>v.lang && v.lang.toLowerCase().startsWith('fr'));
-    const sel=$('voiceSelect');sel.innerHTML='';
-    (voices.length?voices:speechSynthesis.getVoices()).forEach((v,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=v.name+' — '+v.lang;sel.appendChild(o)});
-    const saved=Number(localStorage.getItem(STORAGE.voice)||0);sel.selectedIndex=clamp(saved,0,Math.max(0,sel.options.length-1));
-  }
-  function speakPage(){
-    speechSynthesis.cancel();const txt=pageText();if(!txt){showToast('Passez à une page du récit');return}
-    const u=new SpeechSynthesisUtterance(txt);const all=(voices.length?voices:speechSynthesis.getVoices());
-    if(all.length)u.voice=all[clamp($('voiceSelect').selectedIndex,0,all.length-1)];
-    u.lang='fr-FR';u.rate=Number($('speechRate').value)||.95;
-    u.onstart=()=>$('audioStatus').textContent='Lecture en cours…';
-    u.onend=()=>$('audioStatus').textContent='Page terminée.';
-    speechSynthesis.speak(u);
-  }
-  buildChapters();
-  setTheme(localStorage.getItem(STORAGE.theme)||'ivory');
-  document.documentElement.style.setProperty('--reader-size',(localStorage.getItem(STORAGE.size)||19)+'px');
-  document.documentElement.style.setProperty('--reader-line',(localStorage.getItem(STORAGE.line)||1.72));
-  $('fontSize').value=localStorage.getItem(STORAGE.size)||19;$('lineHeight').value=localStorage.getItem(STORAGE.line)||1.72;
-  $('speechRate').value=localStorage.getItem(STORAGE.rate)||.95;
-  loadVoices();if('speechSynthesis'in window)speechSynthesis.onvoiceschanged=loadVoices;
-  requestAnimationFrame(()=>requestAnimationFrame(()=>computePages(false)));\n  setTimeout(()=>computePages(false),180);\n  setTimeout(()=>computePages(false),650);
-  prevBtn.addEventListener('click',prev);nextBtn.addEventListener('click',next);
-  $('chaptersBtn').addEventListener('click',()=>openDrawer('chaptersDrawer'));
-  $('settingsBtn').addEventListener('click',()=>openDrawer('settingsDrawer'));
-  $('audioBtn').addEventListener('click',()=>openDrawer('audioDrawer'));
-  $('fullscreenBtn').addEventListener('click',toggleFullscreen);$('fsExit').addEventListener('click',exitFullscreen);
-  $('backdrop').addEventListener('click',closeDrawers);document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',closeDrawers));
-  document.querySelectorAll('[data-theme]').forEach(b=>b.addEventListener('click',()=>setTheme(b.dataset.theme)));
-  $('fontSize').addEventListener('change',e=>setSize(e.target.value));$('lineHeight').addEventListener('change',e=>setLine(e.target.value));
-  $('resetReading').addEventListener('click',()=>{current=0;render();closeDrawers()});
-  $('voiceSelect').addEventListener('change',e=>localStorage.setItem(STORAGE.voice,String(e.target.selectedIndex)));
-  $('speechRate').addEventListener('input',e=>localStorage.setItem(STORAGE.rate,e.target.value));
-  $('audioPlay').addEventListener('click',speakPage);$('audioPause').addEventListener('click',()=>speechSynthesis.paused?speechSynthesis.resume():speechSynthesis.pause());$('audioStop').addEventListener('click',()=>{speechSynthesis.cancel();$('audioStatus').textContent='Lecture arrêtée.'});
-  document.addEventListener('fullscreenchange',()=>{immersive=false;document.body.classList.remove('immersive');updateFullscreen();setTimeout(()=>computePages(true),250)});
-  let sx=null,sy=null;reader.addEventListener('touchstart',e=>{if(e.touches.length===1){sx=e.touches[0].clientX;sy=e.touches[0].clientY}},{passive:true});
-  reader.addEventListener('touchend',e=>{if(sx===null||!e.changedTouches.length)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;sx=sy=null;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.2)dx<0?next():prev()},{passive:true});
-  reader.addEventListener('click',e=>{if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;if(e.target.closest('button,a,input,select,textarea'))return;const r=reader.getBoundingClientRect();e.clientX-r.left<r.width/2?prev():next()});
-  $('app').addEventListener('keydown',e=>{if(e.target.matches('input,select,textarea,button'))return;if(e.key==='ArrowRight'||e.key==='PageDown')next();if(e.key==='ArrowLeft'||e.key==='PageUp')prev()});
-  let rt;window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>computePages(true),250)},{passive:true});
-  if('serviceWorker'in navigator && location.protocol.startsWith('http'))navigator.serviceWorker.register('sw.js').catch(()=>{});
-})();
-</script>
-</body>
-</html>
