@@ -1451,12 +1451,31 @@ body.immersive .flow-content .chapter p{padding-left:clamp(24px,7vw,82px);paddin
   function openDrawer(id){closeDrawers();$(id).classList.add('open');$('backdrop').classList.add('open')}
   function computePages(preserve=true){
     const ratio=textPages>1?clamp((current-1)/(textPages-1),0,1):0;
-    const w=viewport.clientWidth||1;
+    const wasHidden=getComputedStyle(reader).display==='none';
+    const previousVisibility=reader.style.visibility;
+    const previousPosition=reader.style.position;
+    if(wasHidden){
+      reader.style.display='block';
+      reader.style.visibility='hidden';
+      reader.style.position='absolute';
+      reader.style.left='0';
+      reader.style.right='0';
+      reader.style.pointerEvents='none';
+    }
+    const w=Math.max(1,viewport.clientWidth||reader.clientWidth||window.innerWidth||1);
     flow.style.columnWidth=w+'px';
     flow.style.width=w+'px';
     void flow.offsetWidth;
     textPages=Math.max(1,Math.ceil((flow.scrollWidth-1)/w));
     totalPages=textPages+1;
+    if(wasHidden){
+      reader.style.display='none';
+      reader.style.visibility=previousVisibility;
+      reader.style.position=previousPosition;
+      reader.style.left='';
+      reader.style.right='';
+      reader.style.pointerEvents='';
+    }
     if(current>0 && preserve) current=1+Math.round(ratio*Math.max(0,textPages-1));
     current=clamp(current,0,textPages);
     render(false);
@@ -1540,7 +1559,7 @@ body.immersive .flow-content .chapter p{padding-left:clamp(24px,7vw,82px);paddin
   $('fontSize').value=localStorage.getItem(STORAGE.size)||19;$('lineHeight').value=localStorage.getItem(STORAGE.line)||1.72;
   $('speechRate').value=localStorage.getItem(STORAGE.rate)||.95;
   loadVoices();if('speechSynthesis'in window)speechSynthesis.onvoiceschanged=loadVoices;
-  requestAnimationFrame(()=>requestAnimationFrame(()=>computePages(false)));
+  requestAnimationFrame(()=>requestAnimationFrame(()=>computePages(false)));\n  setTimeout(()=>computePages(false),180);\n  setTimeout(()=>computePages(false),650);
   prevBtn.addEventListener('click',prev);nextBtn.addEventListener('click',next);
   $('chaptersBtn').addEventListener('click',()=>openDrawer('chaptersDrawer'));
   $('settingsBtn').addEventListener('click',()=>openDrawer('settingsDrawer'));
