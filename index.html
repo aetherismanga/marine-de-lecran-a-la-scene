@@ -45,11 +45,11 @@ button{cursor:pointer}
 .cover-page{padding:0;background:#111;display:flex;align-items:center;justify-content:center}
 .cover-page img{width:100%;height:100%;display:block;object-fit:contain;background:#111;filter:drop-shadow(0 14px 28px rgba(0,0,0,.22))}
 .reader-page{padding:0;display:none}
-.flow-viewport{width:100%;height:100%;overflow:hidden}
+.flow-viewport{width:100%;height:100%;overflow:hidden;overscroll-behavior:none}
 .flow-content{
   height:100%;width:100%;column-width:auto;column-gap:0;column-fill:auto;
   padding:34px 0 38px;
-  font-size:var(--reader-size);line-height:var(--reader-line);text-align:justify;hyphens:auto;
+  font-size:var(--reader-size);line-height:var(--reader-line);text-align:justify;hyphens:auto;overflow:visible;
 }
 .flow-content .chapter-head,
 .flow-content .chapter p{
@@ -58,8 +58,8 @@ button{cursor:pointer}
 }
 .chapter{break-before:column;column-break-before:always}
 .chapter:first-child{break-before:auto;column-break-before:auto}
-.chapter-head{text-align:center;break-after:avoid;margin:0 0 30px}
-.chapter-visual{position:relative;width:100%;height:clamp(170px,31vh,270px);margin:0 0 18px;border-radius:18px;overflow:hidden;background:#221b24;box-shadow:0 14px 30px rgba(51,31,40,.18);isolation:isolate}
+.chapter-head{text-align:center;break-after:auto;break-inside:avoid;column-break-inside:avoid;margin:0 0 30px}
+.chapter-visual{position:relative;width:auto;height:clamp(170px,31vh,270px);margin:0 clamp(24px,7vw,70px) 18px;border-radius:18px;overflow:hidden;background:#221b24;box-shadow:0 14px 30px rgba(51,31,40,.18);isolation:isolate;break-inside:avoid;column-break-inside:avoid}
 .chapter-visual::before{content:"";position:absolute;inset:-18px;background-image:var(--chapter-bg);background-size:cover;background-position:center;filter:blur(16px) brightness(.62) saturate(.9);transform:scale(1.09);z-index:-2}
 .chapter-visual::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(30,20,30,.02),rgba(30,20,30,.18));z-index:-1}
 .chapter-visual img{display:block;width:100%;height:100%;object-fit:contain;object-position:center;filter:drop-shadow(0 8px 18px rgba(0,0,0,.18))}
@@ -179,7 +179,7 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
   .flow-content .chapter-head,
   .flow-content .chapter p{padding-left:20px;padding-right:20px}
   .chapter-head{margin-bottom:20px}
-  .chapter-visual{height:clamp(155px,27vh,220px);margin-bottom:14px;border-radius:14px}
+  .chapter-visual{height:clamp(155px,27vh,220px);margin:0 20px 14px;border-radius:14px}
   .chapter h1{font-size:clamp(1.35rem,6vw,1.8rem)}
   .nav{margin-top:4px}
   .nav button{min-height:40px;padding:7px 10px;font-size:.84rem;border-radius:16px}
@@ -219,8 +219,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-0-4" class="">Je n&#x27;avais absolument aucune intention de devenir fan de Marine.</p>
 </section>
 <section class="chapter" id="sec-1" data-section="1">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/Marine_in_2025.jpg')"><img src="assets/chapitres/Marine_in_2025.jpg" alt="Marine sur scène — ouverture du prologue" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">PROLOGUE</div>
 <h1>JE N&#x27;AVAIS PAS PRÉVU DE DEVENIR FAN</h1></div>
 <p id="p-1-0" class="first-para">À quarante-cinq ans, on pense avoir dépassé l&#x27;âge des emballements de téléspectateur.</p>
@@ -288,8 +288,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-1-62" class="">Il est sur ce qu&#x27;une artiste peut déclencher chez quelqu&#x27;un qui ne s&#x27;y attendait plus vraiment.</p>
 </section>
 <section class="chapter" id="sec-2" data-section="2">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/CHATEAU_DES_VIVES-EAUX.jpg')"><img src="assets/chapitres/CHATEAU_DES_VIVES-EAUX.jpg" alt="Le château des Vives-Eaux — les débuts de la Star Academy" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">CHAPITRE 1</div>
 <h1>AVANT MARINE, IL Y AVAIT DÉJÀ LE CHÂTEAU</h1></div>
 <p id="p-2-0" class="first-para">Pour comprendre ce qui m&#x27;est arrivé avec Marine, il faut remonter bien avant elle.</p>
@@ -346,8 +346,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-2-51" class="">Il ne savait simplement pas qu&#x27;il lui restait une saison avant de perdre toute crédibilité sur ce point.</p>
 </section>
 <section class="chapter" id="sec-3" data-section="3">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/Tableau_de_Grégory_Lemarchal_par_Jean-Loup_Othenin-Girard.jpg')"><img src="assets/chapitres/Tableau_de_Grégory_Lemarchal_par_Jean-Loup_Othenin-Girard.jpg" alt="Hommage à Grégory Lemarchal" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">CHAPITRE 2</div>
 <h1>GRÉGORY, LE PREMIER CHOC</h1></div>
 <p id="p-3-0" class="first-para">Il y a cependant une exception dans mon histoire de téléspectateur raisonnable.</p>
@@ -406,8 +406,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-3-53" class="">Je ne savais simplement pas encore qu&#x27;elle allait revenir.</p>
 </section>
 <section class="chapter" id="sec-4" data-section="4">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/CHATEAU_DES_VIVES-EAUX_2022.jpg')"><img src="assets/chapitres/CHATEAU_DES_VIVES-EAUX_2022.jpg" alt="Le château des Vives-Eaux lors du retour de la Star Academy" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">CHAPITRE 3</div>
 <h1>LE RETOUR DU CHÂTEAU, SANS LE COUP DE FOUDRE</h1></div>
 <p id="p-4-0" class="first-para">Le retour de la Star Academy en 2022 avait quelque chose de rassurant.</p>
@@ -449,8 +449,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-4-36" class="">Il n&#x27;a pas tenu longtemps.</p>
 </section>
 <section class="chapter" id="sec-5" data-section="5">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/Marine_in_2025-3.jpg')"><img src="assets/chapitres/Marine_in_2025-3.jpg" alt="Marine en pleine interprétation" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">CHAPITRE 4</div>
 <h1>UNE VOIX « ORDINAIRE » QUI NE L&#x27;ÉTAIT PAS</h1></div>
 <p id="p-5-0" class="first-para">Le 12 octobre 2024, la nouvelle saison de la Star Academy commence sur TF1.</p>
@@ -518,8 +518,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-5-62" class="">Et ça, pour raconter une histoire, c&#x27;est beaucoup plus intéressant qu&#x27;un succès tombé du ciel.</p>
 </section>
 <section class="chapter" id="sec-6" data-section="6">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/Marine_in_2025-2.jpg')"><img src="assets/chapitres/Marine_in_2025-2.jpg" alt="Marine — le chemin avant le château" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">CHAPITRE 5</div>
 <h1>AVANT LE CHÂTEAU, UNE FILLE DU NORD QUI N&#x27;A PAS ARRÊTÉ D&#x27;ESSAYER</h1></div>
 <p id="p-6-0" class="first-para">Marine Delplace est née le 29 mars 2000 à Arras.</p>
@@ -579,8 +579,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-6-54" class="">J&#x27;avais pourtant encore quelques semaines avant d&#x27;être officiellement démasqué.</p>
 </section>
 <section class="chapter" id="sec-7" data-section="7">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/Château_des_Vives-Eaux_1-6.jpg')"><img src="assets/chapitres/Château_des_Vives-Eaux_1-6.jpg" alt="Le château des Vives-Eaux — doutes et vie au château" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">CHAPITRE 6</div>
 <h1>LE CHÂTEAU, LES DOUTES ET LE KLAXON DU TGV</h1></div>
 <p id="p-7-0" class="first-para">Il serait facile de raconter la saison de Marine comme une marche triomphale vers la victoire.</p>
@@ -702,8 +702,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-7-116" class="">Moi, c&#x27;est ce que je trouvais humain.</p>
 </section>
 <section class="chapter" id="sec-8" data-section="8">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/Marine_in_2025-4.jpg')"><img src="assets/chapitres/Marine_in_2025-4.jpg" alt="Marine sur scène — le moment où le spectateur devient fan" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">CHAPITRE 7</div>
 <h1>QUAND LE SPECTATEUR DEVIENT FAN</h1></div>
 <p id="p-8-0" class="first-para">Je ne sais pas quel est le critère officiel pour obtenir sa carte de fan.</p>
@@ -784,8 +784,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-8-75" class="">Elle change tout.</p>
 </section>
 <section class="chapter" id="sec-9" data-section="9">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/Nikos_Aliagas_Marine_Helena_finale_Star_Academy_2025.jpg')"><img src="assets/chapitres/Nikos_Aliagas_Marine_Helena_finale_Star_Academy_2025.jpg" alt="Marine dans l’univers Star Academy" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">CHAPITRE 8</div>
 <h1>LE GROGNARD SE MET À RACONTER MARINE</h1></div>
 <p id="p-9-0" class="first-para">Créer du contenu sur quelqu&#x27;un qu&#x27;on admire est un exercice plus compliqué qu&#x27;il n&#x27;y paraît.</p>
@@ -937,8 +937,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-9-146" class="">Et parfois, c&#x27;est largement suffisant pour changer une trajectoire créative.</p>
 </section>
 <section class="chapter" id="sec-10" data-section="10">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/Marine_-_finale_Star_Academy_2025.jpg')"><img src="assets/chapitres/Marine_-_finale_Star_Academy_2025.jpg" alt="Marine lors de la finale de la Star Academy 2025" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">CHAPITRE 9</div>
 <h1>« MAMAN, J&#x27;AI GAGNÉ »</h1></div>
 <p id="p-10-0" class="first-para">Avant cette finale, il y avait eu les demi-finales.</p>
@@ -1052,8 +1052,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-10-108" class="">Pour un fan, c&#x27;est déjà beaucoup.</p>
 </section>
 <section class="chapter" id="sec-11" data-section="11">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/Finale_Star_Academy_2025.jpg')"><img src="assets/chapitres/Finale_Star_Academy_2025.jpg" alt="La finale de Star Academy 2025" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">CHAPITRE 10</div>
 <h1>APRÈS LA FINALE, TOUT COMMENCE</h1></div>
 <p id="p-11-0" class="first-para">Les mois qui suivent la victoire vont vite.</p>
@@ -1156,8 +1156,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-11-97" class="">C&#x27;est peut-être le plus beau compliment que l&#x27;on puisse faire à quelqu&#x27;un sorti d&#x27;un télé-crochet.</p>
 </section>
 <section class="chapter" id="sec-12" data-section="12">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/Corum_(9404140332).jpg')"><img src="assets/chapitres/Corum_(9404140332).jpg" alt="Le Corum de Montpellier — de l’écran à la scène" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">CHAPITRE 11</div>
 <h1>MONTPELLIER : DE L&#x27;ÉCRAN À LA SCÈNE</h1></div>
 <p id="p-12-0" class="first-para">Le 7 décembre 2025, Marine se produit au Corum de Montpellier, dans la salle Berlioz, dans le cadre de sa première tournée solo.</p>
@@ -1231,8 +1231,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-12-68" class="">Et c&#x27;était largement assez.</p>
 </section>
 <section class="chapter" id="sec-13" data-section="13">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/Star_Academy_2025_Helena_Ambre_Marine.jpg')"><img src="assets/chapitres/Star_Academy_2025_Helena_Ambre_Marine.jpg" alt="Marine après la Star Academy" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">CHAPITRE 12</div>
 <h1>MARINE APRÈS MARINE</h1></div>
 <p id="p-13-0" class="first-para">Il y a un moment que tous les artistes issus d&#x27;une émission doivent affronter.</p>
@@ -1398,8 +1398,8 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <p id="p-13-160" class="">C&#x27;était même plutôt une chance.</p>
 </section>
 <section class="chapter" id="sec-14" data-section="14">
-<div class="chapter-head">
 <figure class="chapter-visual" style="--chapter-bg:url('assets/chapitres/Marine_Léa_-_Star_Academy.jpg')"><img src="assets/chapitres/Marine_Léa_-_Star_Academy.jpg" alt="Marine — image de clôture de l’épilogue" loading="lazy" decoding="async"></figure>
+<div class="chapter-head">
 <div class="chapter-kicker">ÉPILOGUE</div>
 <h1>À MARINE</h1></div>
 <p id="p-14-0" class="first-para">Tu ne me connais probablement pas.</p>
@@ -1774,6 +1774,13 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
   requestAnimationFrame(()=>requestAnimationFrame(()=>computePages(false)));
   setTimeout(()=>computePages(false),180);
   setTimeout(()=>computePages(false),650);
+  setTimeout(()=>computePages(false),1200);
+  flow.querySelectorAll('.chapter-visual img').forEach(img=>{
+    if(!img.complete){
+      img.addEventListener('load',()=>requestAnimationFrame(()=>computePages(false)),{once:true});
+      img.addEventListener('error',()=>requestAnimationFrame(()=>computePages(false)),{once:true});
+    }
+  });
   prevBtn.addEventListener('click',prev);nextBtn.addEventListener('click',next);counter.addEventListener('click',openPageJump);
   pageJumpRange.addEventListener('input',e=>syncPageJump(e.target.value));
   pageJumpInput.addEventListener('input',e=>syncPageJump(e.target.value));
