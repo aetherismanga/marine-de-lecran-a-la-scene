@@ -196,10 +196,10 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
   <header class="topbar">
     <div class="brand"><span class="brand-kicker">♫ Le Grognard du Net</span><span class="brand-title">Marine — De l’écran à la scène</span></div>
     <div class="actions">
-      <button class="icon-btn" id="chaptersBtn" aria-label="Chapitres" title="Chapitres"><img src="01.png" alt=""></button>
-      <button class="icon-btn" id="audioBtn" aria-label="Lecture audio" title="Lecture audio"><img src="02.png" alt=""></button>
-      <button class="icon-btn" id="fullscreenBtn" aria-label="Plein écran" title="Plein écran"><img src="03.png" alt=""></button>
-      <button class="icon-btn" id="settingsBtn" aria-label="Confort de lecture" title="Confort de lecture"><img src="04.png" alt=""></button>
+      <button class="icon-btn" id="chaptersBtn" aria-label="Chapitres" title="Chapitres"><img src="02.png?v=2" alt=""></button>
+      <button class="icon-btn" id="audioBtn" aria-label="Lecture audio" title="Lecture audio"><img src="04.png?v=2" alt=""></button>
+      <button class="icon-btn" id="fullscreenBtn" aria-label="Plein écran" title="Plein écran"><img src="03.png?v=2" alt=""></button>
+      <button class="icon-btn" id="settingsBtn" aria-label="Confort de lecture" title="Confort de lecture"><img src="01.png?v=2" alt=""></button>
     </div>
   </header>
 
@@ -1584,10 +1584,10 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
   const cover=$('coverPage'),reader=$('readerPage'),endPage=$('endPage'),viewport=$('flowViewport'),flow=$('flowContent');
   const prevBtn=$('prevBtn'),nextBtn=$('nextBtn'),counter=$('pageCounter'),progress=$('progressBar'),percent=$('percentLabel'),chapterLabel=$('chapterLabel');
   const pageJumpModal=$('pageJumpModal'), pageJumpRange=$('pageJumpRange'), pageJumpInput=$('pageJumpInput'), pageJumpInfo=$('pageJumpInfo');
-  setTopIcon('chaptersBtn','01.png','Chapitres');
-  setTopIcon('audioBtn','02.png','Lecture audio');
-  setTopIcon('fullscreenBtn','03.png','Plein écran');
-  setTopIcon('settingsBtn','04.png','Confort de lecture');
+  setTopIcon('chaptersBtn','02.png?v=2','Chapitres');
+  setTopIcon('audioBtn','04.png?v=2','Lecture audio');
+  setTopIcon('fullscreenBtn','03.png?v=2','Plein écran');
+  setTopIcon('settingsBtn','01.png?v=2','Confort de lecture');
   const STORAGE={page:'marine.reader.page',theme:'marine.reader.theme',size:'marine.reader.size',line:'marine.reader.line',voice:'marine.reader.voice',rate:'marine.reader.rate',opinion:'marine.reader.opinion',notify:'marine.reader.notify'};
   let current=Number(localStorage.getItem(STORAGE.page)||0), textPages=1, totalPages=3, immersive=false, voices=[],selectedRating=0,selectedFuture='';
   const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -1680,7 +1680,7 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
   function setLine(v){v=clamp(Number(v)||1.72,1.45,2.05);document.documentElement.style.setProperty('--reader-line',v);$('lineHeight').value=v;localStorage.setItem(STORAGE.line,v);requestAnimationFrame(()=>computePages(true))}
   function updateFullscreen(){
     const active=!!document.fullscreenElement||immersive;
-    $('fullscreenBtn'); if(active){const btn=$('fullscreenBtn');btn.classList.add('asset-text');btn.innerHTML='<span aria-hidden="true">✕</span>';btn.setAttribute('aria-label','Quitter le plein écran');btn.setAttribute('title','Quitter le plein écran');} else { setTopIcon('fullscreenBtn','03.png','Plein écran'); } 
+    $('fullscreenBtn'); if(active){const btn=$('fullscreenBtn');btn.classList.add('asset-text');btn.innerHTML='<span aria-hidden="true">✕</span>';btn.setAttribute('aria-label','Quitter le plein écran');btn.setAttribute('title','Quitter le plein écran');} else { setTopIcon('fullscreenBtn','03.png?v=2','Plein écran'); } 
   }
   async function toggleFullscreen(){
     closeDrawers();
