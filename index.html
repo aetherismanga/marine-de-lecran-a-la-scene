@@ -30,10 +30,9 @@ button,input,select{font:inherit}
 button{cursor:pointer}
 .app{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;overflow:hidden}
 .topbar{flex:0 0 auto;display:flex;align-items:center;gap:10px;justify-content:space-between;padding:10px 12px;background:linear-gradient(135deg, rgba(28,21,38,.98), rgba(37,34,58,.95));color:#fff;border-bottom:1px solid rgba(255,255,255,.08);backdrop-filter:blur(12px);box-shadow:0 10px 24px rgba(15,10,20,.25);z-index:10}
-.brand{min-width:0;display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-areas:"mark kicker" "mark title";column-gap:9px;row-gap:0;align-items:center;max-width:44vw}
-.brand::before{content:"♪";grid-area:mark;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(191,111,140,.28),rgba(202,163,93,.16));border:1px solid rgba(255,255,255,.12);color:#f3d6e0;font-size:.88rem;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
-.brand-kicker{grid-area:kicker;font-size:.56rem;letter-spacing:.16em;text-transform:uppercase;color:#e9d5df;opacity:.88;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.brand-title{grid-area:title;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:.94rem;line-height:1.05}
+.music-badge{flex:0 0 auto;display:flex;align-items:center;gap:8px;min-width:0;padding:7px 10px;border-radius:15px;background:linear-gradient(135deg,rgba(109,70,123,.42),rgba(191,111,140,.22));border:1px solid rgba(255,255,255,.13);box-shadow:inset 0 1px 0 rgba(255,255,255,.10),0 8px 16px rgba(0,0,0,.14)}
+.music-badge-icon{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.34),rgba(255,255,255,.06) 52%,rgba(191,111,140,.28));border:1px solid rgba(255,255,255,.18);color:#fff4f8;font-size:1rem;text-shadow:0 0 10px rgba(255,211,231,.55)}
+.music-badge-text{font-size:.76rem;line-height:1.05;letter-spacing:.04em;text-transform:uppercase;font-weight:700;color:#fff;white-space:nowrap}
 .actions{display:flex;gap:10px;align-items:center;flex-wrap:nowrap}
 .icon-btn{width:72px;height:72px;min-width:72px;min-height:72px;padding:0;border:0;background:transparent;color:#fff;box-shadow:none;transition:transform .16s ease,filter .16s ease}
 .icon-btn:hover,.icon-btn:focus-visible{transform:translateY(-1px) scale(1.02);filter:brightness(1.07)}
@@ -91,6 +90,7 @@ button{cursor:pointer}
 #chaptersDrawer .drawer-body>.badge{background:rgba(255,255,255,.75);border-color:rgba(201,184,166,.75);padding:6px 10px;font-size:.74rem}
 #chaptersDrawer .chip-row{gap:7px;margin:9px 0 16px}
 #chaptersDrawer .ui-chip{padding:7px 10px;font-size:.73rem;background:linear-gradient(180deg,rgba(248,227,235,.9),rgba(255,247,241,.95));border-color:rgba(191,111,140,.14)}
+.chapter-drawer-spacer{height:4px}
 .close-btn{border:0;background:transparent;font-size:1.5rem;min-width:44px;min-height:44px;color:var(--ink)}
 .drawer-body{padding:14px 16px 28px}
 .chapter-list{display:grid;gap:9px;margin-top:4px}
@@ -203,7 +203,10 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <body class="theme-ivory">
 <div class="app" id="app" tabindex="0">
   <header class="topbar">
-    <div class="brand"><span class="brand-kicker">♫ Le Grognard du Net</span><span class="brand-title">Marine — De l’écran à la scène</span></div>
+    <div class="music-badge" aria-label="Mes musiques" title="Mes musiques">
+  <span class="music-badge-icon" aria-hidden="true">♫</span>
+  <span class="music-badge-text">Mes musiques</span>
+</div>
     <div class="actions">
       <button class="icon-btn" id="chaptersBtn" aria-label="Chapitres" title="Chapitres"><img src="02.png?v=2" alt=""></button>
       <button class="icon-btn" id="audioBtn" aria-label="Lecture audio" title="Lecture audio"><img src="04.png?v=2" alt=""></button>
@@ -1528,9 +1531,7 @@ html:fullscreen .end-page,body.immersive .end-page{height:100%!important;border:
 <aside class="drawer" id="chaptersDrawer">
   <div class="drawer-head"><h2>Chapitres</h2><button class="close-btn" data-close>×</button></div>
   <div class="drawer-body">
-    <div class="badge">Récit complet · 12 chapitres + prologue et épilogue</div>
-    <div class="chip-row"><span class="ui-chip">♡ récit de fan</span><span class="ui-chip">♫ musique</span><span class="ui-chip">✦ lecture confortable</span></div>
-    <div style="height:12px"></div>
+    <div class="chapter-drawer-spacer" aria-hidden="true"></div>
     <div class="chapter-list" id="chapterList"></div>
   </div>
 </aside>
